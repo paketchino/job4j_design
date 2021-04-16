@@ -7,7 +7,7 @@ sudo: false
 
 env:
   global:
-    - CODECOV_TOKEN="chansforman@gmail.com"
+    - CODECOV_TOKEN="b59d58fb-ab9f-42fa-a758-499bd1868e9c"
 
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонний сервис https://codecov.io/
@@ -17,6 +17,6 @@ after_success:
 notifications:
   email:
     recipients:
-      -rail.shamsemukhametov@mail.ru
+      -chansforman@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
