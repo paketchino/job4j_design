@@ -24,11 +24,11 @@ public class MatrixItTest {
     @Test
     public void when4() {
         MatrixIt it = new MatrixIt(
-                new int[][] {{1, 2, 3}, {4, 5, 6}}
+                new int[][] {{8, 9, 7}, {4, 5, 6}}
         );
-        assertThat(it.next(), is(1));
-        assertThat(it.next(), is(2));
-        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(8));
+        assertThat(it.next(), is(9));
+        assertThat(it.next(), is(7));
         assertThat(it.next(), is(4));
         assertThat(it.next(), is(5));
         assertThat(it.next(), is(6));
