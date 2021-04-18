@@ -13,10 +13,8 @@ public class Event implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        for (int i = 0; i < number.length; i++) {
-            if (number[i] % 2 == 0) {
-                return true;
-            }
+        if (rsl()) {
+            return true;
         }
         return false;
     }
@@ -26,11 +24,20 @@ public class Event implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        for (int i = 0; i < number.length; i++) {
-            if (number[i] % 2 == 0) {
-                 return number[number[i]];
-            }
+        if (rsl()) {
+            return number[count++];
         }
-        return number[count];
+        return -1;
+    }
+
+    private boolean rsl() {
+        for (int i = count; i < number.length; i++) {
+            if (number[count] % 2 == 0) {
+                count = i;
+                return true;
+            }
+            count++;
+        }
+        return false;
     }
 }
