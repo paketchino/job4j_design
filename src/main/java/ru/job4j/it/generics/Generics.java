@@ -18,33 +18,33 @@ public class Generics {
         gen.printObject(third);
         System.out.println();
 
-        gen.printBoundedWildCard(first);
+      //  gen.printBoundedWildCard(first);
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
 
         gen.printLowerBoundedCard(first);
         gen.printLowerBoundedCard(second);
-        gen.printLowerBoundedCard(third);
+      //  gen.printLowerBoundedCard(third);
     }
 
     public void printObject(List<?> list) {
-        for (Iterator<?> it = list.iterator(); it.hasNext(); ) {
+        for (Iterator<?> it = list.iterator(); it.hasNext();) {
             Object next = it.next();
             System.out.println("Текущий элемент " + next);
         }
     }
 
-    public void printBoundedWildCard(List<? extends Animal> list) {
-        for (Iterator<? extends Animal> it = list.iterator(); it.hasNext();) {
+    public void printBoundedWildCard(List<? extends Predator> list) {
+        for (Iterator<? extends Predator> it = list.iterator(); it.hasNext();) {
             Animal next = it.next();
             System.out.println("Текущий элемент " + next);
         }
     }
 
-    public void printLowerBoundedCard(List<? super Tiger> list) {
-        for (Iterator<? super Tiger> it = list.iterator(); it.hasNext(); ) {
-            Tiger next = (Tiger) it.next();
+    public void printLowerBoundedCard(List<? super Predator> list) {
+        for (Iterator<? super Predator> it = list.iterator(); it.hasNext();) {
+            Predator next = (Predator) it.next();
             System.out.println("Текущий элемент " + next);
         }
     }

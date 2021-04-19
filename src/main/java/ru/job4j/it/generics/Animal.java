@@ -21,19 +21,23 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+        return "Animal{"
+                + "name='" + name + '\''
+                + ", age=" + age
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Animal animal = (Animal) o;
-        return age == animal.age &&
-                Objects.equals(name, animal.name);
+        return age == animal.age
+                && Objects.equals(name, animal.name);
     }
 
     @Override
