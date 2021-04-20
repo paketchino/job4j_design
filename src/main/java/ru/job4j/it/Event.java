@@ -13,10 +13,7 @@ public class Event implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (rsl()) {
-            return true;
-        }
-        return false;
+        return nextEven();
     }
 
     @Override
@@ -24,13 +21,10 @@ public class Event implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        if (rsl()) {
-            return number[count++];
-        }
-        return -1;
+        return number[count++];
     }
 
-    private boolean rsl() {
+    private boolean nextEven() {
         for (int i = count; i < number.length; i++) {
             if (number[count] % 2 == 0) {
                 count = i;
