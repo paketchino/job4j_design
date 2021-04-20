@@ -3,6 +3,7 @@ package ru.job4j.it.generics;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class Generics {
     public static void main(String[] args) {
@@ -44,7 +45,7 @@ public class Generics {
 
     public void printLowerBoundedCard(List<? super Predator> list) {
         for (Iterator<? super Predator> it = list.iterator(); it.hasNext();) {
-            Predator next = (Predator) it.next();
+            Integer next = (Integer) it.next();
             System.out.println("Текущий элемент " + next);
         }
     }
