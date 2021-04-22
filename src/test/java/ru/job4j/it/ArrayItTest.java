@@ -29,7 +29,7 @@ public class ArrayItTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void WhenEmpty() {
+    public void whenEmpty() {
         ArrayIt it = new ArrayIt(
                 new int[] {}
         );

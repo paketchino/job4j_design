@@ -1,4 +1,4 @@
-package ru.job4j.it.simpleArray;
+package ru.job4j.it.array;
 
 import java.util.Iterator;
 import java.util.Objects;
@@ -10,7 +10,7 @@ public class SimpleArray<T> implements Iterable<T> {
     private int size;
 
     public SimpleArray(int capacity) {
-        this.values = (T[]) new Object[capacity] ;
+        this.values = (T[]) new Object[capacity];
     }
 
     public void add(T model) {

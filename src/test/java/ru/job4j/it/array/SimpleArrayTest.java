@@ -1,8 +1,6 @@
-package ru.job4j.it.simpleArray;
+package ru.job4j.it.array;
 
 import org.junit.Test;
-
-import javax.swing.*;
 
 import java.util.Iterator;
 
