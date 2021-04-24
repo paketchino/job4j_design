@@ -22,7 +22,7 @@ public class RoleStoreTest {
     public void replace() {
         RoleStore roleStore = new RoleStore();
         roleStore.add(new Role("123"));
-        roleStore.replace("123",new Role("124"));
+        roleStore.replace("123", new Role("124"));
         assertThat(roleStore.findById("124").getId(), is("124"));
     }
 
