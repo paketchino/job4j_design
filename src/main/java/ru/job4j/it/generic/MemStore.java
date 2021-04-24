@@ -7,8 +7,6 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     private final List<T> mem = new ArrayList<>();
 
-    private int ids = 1;
-
     @Override
     public void add(T model) {
         mem.add(model);
@@ -16,28 +14,37 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        T t = findById(id);
-        return false;
+        int index = findIndexById(id);
+        boolean rsl = index != 1;
+        if (rsl) {
+            mem.set(index, model);
+        }
+        return rsl;
     }
 
     @Override
     public boolean delete(String id) {
-        T t = findById(id);
-        return mem.remove(t);
+        int index = findIndexById(id);
+        boolean rsl = index != 1;
+        if (rsl) {
+            mem.remove(index);
+        }
+        return rsl;
     }
 
     @Override
     public T findById(String id) {
-        return mem.stream()
-                .filter(t -> t.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        int index = findIndexById(id);
+        return index != -1 ? mem.get(index) : null;
     }
 
-//    private int findIndexById(String id) {
-//        return mem.stream()
-//                .filter((index) -> mem.get(index).getId().equals(id))
-//                .findFirst()
-//                .orElse(null);
-//    }
+    private int findIndexById(String id) {
+        int rsl = -1;
+        for (int index = 0; index < mem.size(); index++) {
+            if (mem.get(index).getId().equals(id)) {
+                rsl = index;
+            }
+        }
+        return rsl;
+    }
 }
