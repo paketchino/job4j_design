@@ -1,7 +1,7 @@
 package ru.job4j.it.generic;
 
-public class Role<T extends Base> extends Base {
-    protected Role(String id) {
+public class Role extends Base {
+    public Role(String id) {
         super(id);
     }
 }

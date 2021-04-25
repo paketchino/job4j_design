@@ -31,6 +31,7 @@ public class UserStoreTest {
         userStore.add(new User("125"));
         userStore.add(new User("126"));
         userStore.delete("124");
+        assertNull(userStore.findById("124").getId(), (null));
         assertThat(userStore.findById("123").getId(), is("123"));
         assertThat(userStore.findById("125").getId(), is("125"));
         assertThat(userStore.findById("126").getId(), is("126"));

@@ -33,6 +33,7 @@ public class RoleStoreTest {
         roleStore.add(new Role("124"));
         roleStore.add(new Role("125"));
         roleStore.delete("124");
+        assertNull(roleStore.findById("124").getId(), (null));
         assertThat(roleStore.findById("123").getId(), is("123"));
         assertThat(roleStore.findById("125").getId(), is("125"));
     }

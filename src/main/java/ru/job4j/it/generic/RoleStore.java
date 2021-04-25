@@ -11,13 +11,11 @@ public class RoleStore<T extends Base> implements Store<Role> {
 
     @Override
     public boolean replace(String id, Role model) {
-        roleStore.findById(id);
         return roleStore.replace(id, model);
     }
 
     @Override
     public boolean delete(String id) {
-        roleStore.findById(id);
         return roleStore.delete(id);
     }
 
