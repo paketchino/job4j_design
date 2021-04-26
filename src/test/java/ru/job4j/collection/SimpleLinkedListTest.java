@@ -14,8 +14,14 @@ public class SimpleLinkedListTest {
         List<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
         assertThat(list.get(0), Is.is(1));
         assertThat(list.get(1), Is.is(2));
+        assertThat(list.get(2), Is.is(3));
+        assertThat(list.get(3), Is.is(4));
+        assertThat(list.get(4), Is.is(5));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)

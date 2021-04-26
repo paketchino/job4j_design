@@ -5,22 +5,22 @@ import java.util.function.Predicate;
 
 public class SimpleLinkedList<E> implements List<E> {
 
-    private Node<E> fstNode;
-    private Node<E> lstNode;
+    private Node<E> first;
+    private Node<E> last;
     private int size = 0;
     private int modCount;
 
     public SimpleLinkedList () {
-        lstNode = new Node<E>(null, fstNode, null);
-        fstNode = new Node<>(null, null, lstNode);
+        last = new Node<E>(null, first, null);
+        first = new Node<>(null, null, last);
     }
 
     @Override
     public void add(E value) {
-        Node<E> prev = lstNode;
+        Node<E> prev = last;
         prev.setCurrentElement(value);
-        lstNode = new Node<E>(null, prev, null);
-        prev.setNext(lstNode);
+        last = new Node<E>(null, prev, null);
+        prev.setNext(last);
         size++;
         modCount++;
     }
@@ -28,7 +28,7 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> target = fstNode.getNext();
+        Node<E> target = first.getNext();
         for (int i = 0; i < index; i++) {
             target = target.next;
         }
@@ -40,11 +40,11 @@ public class SimpleLinkedList<E> implements List<E> {
         return new Iterator<E>() {
 
             final int expectedModCount = modCount;
-            Node<E> current = fstNode;
+            Node<E> current = first;
 
             @Override
             public boolean hasNext() {
-                return current != null;
+                return current != last;
             }
 
             @Override
