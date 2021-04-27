@@ -2,6 +2,7 @@ package ru.job4j.collection;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.LinkedList;
 
 public class SimpleLinkedList<E> implements List<E> {
 
@@ -40,7 +41,7 @@ public class SimpleLinkedList<E> implements List<E> {
         return new Iterator<E>() {
 
             final int expectedModCount = modCount;
-            Node<E> current = first;
+            Node<E> current = first.next;
 
             @Override
             public boolean hasNext() {
