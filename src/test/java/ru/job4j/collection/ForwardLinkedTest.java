@@ -30,8 +30,9 @@ public class ForwardLinkedTest {
         linked.add(1);
         linked.add(2);
         linked.add(3);
-        assertThat(linked.deleteFirst(), is(1));
         Iterator<Integer> it = linked.iterator();
+        assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
     }
 }
