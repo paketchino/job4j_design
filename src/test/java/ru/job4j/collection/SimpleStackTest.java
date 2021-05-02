@@ -42,4 +42,15 @@ public class SimpleStackTest {
         stack.push(3);
         assertThat(stack.pop(), is(3));
     }
+
+    @Test
+    public void WhenCheckFIFOPushPush() {
+        SimpleStack<Integer> stack = new SimpleStack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.pop();
+        assertThat(stack.pop(), is(2));
+        assertThat(stack.pop(), is(1));
+    }
 }

@@ -40,7 +40,6 @@ public class ForwardLinked<T> implements Iterable<T> {
         return element;
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
