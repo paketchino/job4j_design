@@ -4,8 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+
 public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
+
+    int size = 0;
 
     public void add(T value) {
         Node<T> node = new Node<>(value, null);
@@ -18,6 +21,7 @@ public class ForwardLinked<T> implements Iterable<T> {
             tail = tail.next;
         }
         tail.next = node;
+        size++;
     }
 
     public void addFirst(T value) {
@@ -28,6 +32,25 @@ public class ForwardLinked<T> implements Iterable<T> {
         }
         node.next = head;
         head = node;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public boolean revert() {
+        boolean rsl = false;
+        Node reversePart = null;
+        Node current = head;
+            while (current != null) {
+                Node next = current.next;
+                current.next = reversePart;
+                reversePart = current;
+                current = next;
+                rsl = true;
+            }
+        head = reversePart;
+        return rsl;
     }
 
     public T deleteFirst() {
