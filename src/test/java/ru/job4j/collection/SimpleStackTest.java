@@ -33,7 +33,7 @@ public class SimpleStackTest {
     }
 
     @Test
-    public void WhenPushPush() {
+    public void whenPushPush() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
         stack.pop();
@@ -44,7 +44,7 @@ public class SimpleStackTest {
     }
 
     @Test
-    public void WhenCheckFIFOPushPush() {
+    public void whenCheckFIFOPushPush() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.push(1);
         stack.push(2);

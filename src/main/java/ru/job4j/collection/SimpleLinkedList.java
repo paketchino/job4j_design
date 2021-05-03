@@ -11,7 +11,7 @@ public class SimpleLinkedList<E> implements List<E> {
     private int size = 0;
     private int modCount;
 
-    public SimpleLinkedList () {
+    public SimpleLinkedList() {
         last = new Node<E>(null, first, null);
         first = new Node<>(null, null, last);
     }
@@ -70,7 +70,7 @@ public class SimpleLinkedList<E> implements List<E> {
          Node<E> next;
          Node<E> prev;
 
-        private Node(E currentElement, Node <E> prev, Node<E> next) {
+        private Node(E currentElement, Node<E> prev, Node<E> next) {
             this.currentElement = currentElement;
             this.next = next;
             this.prev = prev;
