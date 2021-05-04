@@ -18,4 +18,8 @@ public class SimpleStack<T> {
     public int getSize() {
         return size;
     }
+
+    public boolean isEmpty() {
+        return getSize() != 0;
+    }
 }

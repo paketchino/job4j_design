@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-
 public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
 
@@ -42,6 +41,9 @@ public class ForwardLinked<T> implements Iterable<T> {
         boolean rsl = false;
         Node reversePart = null;
         Node current = head;
+        if (current.next == null) {
+            return false;
+        }
         while (current != null) {
             Node next = current.next;
             current.next = reversePart;

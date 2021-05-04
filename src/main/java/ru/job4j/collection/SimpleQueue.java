@@ -10,16 +10,12 @@ public class SimpleQueue<T> {
     private final SimpleStack<T> out = new SimpleStack<T>();
 
     public T poll() {
-        if (out.getSize() == 0) {
-            while (isEmpty()) {
+        if (out.isEmpty()) {
+            while(!in.isEmpty()) {
                 out.push(in.pop());
             }
         }
         return out.pop();
-    }
-
-    public boolean isEmpty() {
-        return in.getSize() != 0;
     }
 
     public void push(T value) {
