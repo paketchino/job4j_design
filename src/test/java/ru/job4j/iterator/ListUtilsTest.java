@@ -33,14 +33,13 @@ public class ListUtilsTest {
         List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3));
         ListUtils.addAfter(input, 2, 4);
         assertThat(Arrays.asList(1, 2, 3, 4), Is.is(input));
-
     }
 
     @Test
     public void removeIfNeedCheckValue() {
         List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3));
-        ListUtils.removeIf(input, index -> index.intValue() < 1);
-        assertThat(Arrays.asList(1, 2, 3), Is.is(input));
+        ListUtils.removeIf(input, index -> index.intValue() < 2);
+        assertThat(Arrays.asList(2, 3), Is.is(input));
     }
 
     @Test
@@ -57,11 +56,11 @@ public class ListUtilsTest {
         assertThat(Arrays.asList(1, 2, 2, 2, 2), Is.is(input));
     }
 
-//    @Test
-//    public void removeAll() {
-//        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-//        List<Integer> output = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-//        ListUtils.removeAll(input, output);
-//        assertNull(output);
-//    }
+    @Test
+    public void removeAll() {
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        List<Integer> output = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        ListUtils.removeAll(input, output);
+        assertThat(input, Is.is(Arrays.asList(5)));
+    }
 }
