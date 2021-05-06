@@ -15,11 +15,12 @@ public class SimpleStack<T> {
         size++;
     }
 
+    public boolean isEmpty() {
+        return getSize() == 0;
+    }
+
     public int getSize() {
         return size;
     }
 
-    public boolean isEmpty() {
-        return getSize() != 0;
-    }
 }
