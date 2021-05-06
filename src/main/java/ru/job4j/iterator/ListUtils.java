@@ -53,12 +53,8 @@ public class ListUtils {
         ListIterator<T> listIterator = list.listIterator();
         while (listIterator.hasNext()) {
             T elList = listIterator.next();
-            ListIterator<T> elIterator = elements.listIterator();
-            while (elIterator.hasNext()) {
-                T elElement = elIterator.next();
-                if (elList.equals(elElement)) {
-                    listIterator.remove();
-                }
+            if (elements.contains(elList)) {
+                listIterator.remove();
             }
         }
     }
