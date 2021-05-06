@@ -50,8 +50,8 @@ public class ForwardLinkedTest {
 
     @Test
     public void whenSize0ThenReturnFalse() {
-        ForwardLinked<Integer> forwardLinked = new ForwardLinked<>();
-        assertFalse(forwardLinked.revert());
+        ForwardLinked<Integer> emptyList = new ForwardLinked<>();
+        assertFalse(emptyList.revert());
     }
 
     @Test
