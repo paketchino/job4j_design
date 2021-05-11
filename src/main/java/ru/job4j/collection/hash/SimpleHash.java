@@ -1,16 +1,16 @@
 package ru.job4j.collection.hash;
 
-import org.w3c.dom.Node;
-
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleHash<K, V> implements Iterable {
+public class SimpleHash<K, V> implements Iterable<K> {
+    double LOAD_FACTOR;
     Node<K, V>[] item;
     int size;
     int modCount;
+    int capacity;
 
     public SimpleHash(int capacity) {
         this.item = new Node[capacity];
@@ -30,7 +30,7 @@ public class SimpleHash<K, V> implements Iterable {
     }
 
     public boolean insert(K key, V value) {
-        if ((double)(size / item.length) >= 0.75) {
+        if ((double)(size / item.length) >= LOAD_FACTOR) {
             increase();
         }
         int hash = hash(key);
@@ -45,16 +45,22 @@ public class SimpleHash<K, V> implements Iterable {
         return false;
     }
 
-    private int increase() {
-        SimpleHash<K, V> newItem = new SimpleHash<>(item.length * 2);
-        return 0;
+    private void increase() {
+        Node<K, V>[] newItem = new Node[item.length * 2];
+        for (int i = 0; i < item.length; i++) {
+            newItem[i] = item[i];
+        }
+        size++;
+        item = newItem;
     }
 
-    public V get(K key) {
+    public V get(K key)  {
         int hash = hash(key);
         int index = findIndexInTheBucket(hash);
-        Objects.checkIndex(index, item.length);
-        return (V) item[index];
+        if (item[index].key.equals(key)) {
+            return (V) item[index].value;
+        }
+        return null;
     }
 
     public boolean delete(K key) {
@@ -72,14 +78,20 @@ public class SimpleHash<K, V> implements Iterable {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<K> iterator() {
         return new Iterator() {
 
             private int exceptedModCount = modCount;
             private int index = 0;
             @Override
             public boolean hasNext() {
-                return index < size;
+                for (int i = index; i < item.length; i++) {
+                    if (item[i] != null) {
+                        index = i;
+                        return true;
+                    }
+                }
+                return false;
             }
 
             @Override
@@ -105,6 +117,5 @@ public class SimpleHash<K, V> implements Iterable {
             this.key = key;
             this.value = value;
         }
-
     }
 }
