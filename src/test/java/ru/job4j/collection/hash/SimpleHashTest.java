@@ -14,5 +14,4 @@ public class SimpleHashTest {
         SimpleHash<Integer, Integer> hash = new SimpleHash<>(3);
         assertTrue(hash.insert(1, 1));
     }
-
 }

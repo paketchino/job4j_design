@@ -6,11 +6,11 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleHash<K, V> implements Iterable<K> {
-    double LOAD_FACTOR;
-    Node<K, V>[] item;
-    int size;
-    int modCount;
-    int capacity;
+    private static final double LOAD_FACTOR = 0.75;
+        private Node<K, V>[] item;
+    private int size;
+    private int modCount;
+    private int capacity;
 
     public SimpleHash(int capacity) {
         this.item = new Node[capacity];
@@ -47,18 +47,19 @@ public class SimpleHash<K, V> implements Iterable<K> {
 
     private void increase() {
         Node<K, V>[] newItem = new Node[item.length * 2];
-        for (int i = 0; i < item.length; i++) {
-            newItem[i] = item[i];
+        for (Node<K, V> node : item) {
+            newItem[node.key.hashCode()] = node;
         }
-        size++;
         item = newItem;
     }
 
     public V get(K key)  {
         int hash = hash(key);
         int index = findIndexInTheBucket(hash);
-        if (item[index].key.equals(key)) {
-            return (V) item[index].value;
+        if (item[index] != null) {
+            if (item[index].key.equals(key)) {
+                return (V) item[index].value;
+            }
         }
         return null;
     }
@@ -102,7 +103,7 @@ public class SimpleHash<K, V> implements Iterable<K> {
                 if (exceptedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return item[index++].value;
+                return item[index++].key;
             }
         };
     }
