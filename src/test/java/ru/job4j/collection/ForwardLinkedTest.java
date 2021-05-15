@@ -47,7 +47,6 @@ public class ForwardLinkedTest {
         assertThat(it.next(), is(1));
     }
 
-
     @Test
     public void whenSize0ThenReturnFalse() {
         ForwardLinked<Integer> emptyList = new ForwardLinked<>();

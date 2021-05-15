@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class SimpleHash<K, V> implements Iterable<K> {
     private static final double LOAD_FACTOR = 0.75;
-        private Node<K, V>[] item;
+    private Node<K, V>[] item;
     private int size;
     private int modCount;
     private int capacity;
@@ -20,21 +20,17 @@ public class SimpleHash<K, V> implements Iterable<K> {
         return size;
     }
 
-    private int hash(K key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-    }
-
-    private int findIndexInTheBucket(int hash) {
-        return hash & (item.length - 1);
+    private int hash(K key, Node<K, V>[] item) {
+        int h = (key == null) ? 0 : (key.hashCode()) ^ (key.hashCode() >>> 16);
+        int findIndex = h & (item.length - 1);
+        return findIndex;
     }
 
     public boolean insert(K key, V value) {
         if ((double)(size / item.length) >= LOAD_FACTOR) {
             increase();
         }
-        int hash = hash(key);
-        int index = findIndexInTheBucket(hash);
+        int index = hash(key, item);
         Node<K, V> newNode = new Node<>(index, key, value);
         if (item[index] == null) {
             item[index] = newNode;
@@ -46,16 +42,18 @@ public class SimpleHash<K, V> implements Iterable<K> {
     }
 
     private void increase() {
-        Node<K, V>[] newItem = new Node[item.length * 2];
-        for (Node<K, V> node : item) {
-            newItem[node.key.hashCode()] = node;
+        int newSize = item.length * 2;
+        Node<K, V>[] newItem = new Node[newSize];
+            for (Node<K, V> node : item) {
+                if (node != null) {
+                    newItem[hash(node.key, newItem)] = node;
+                }
         }
         item = newItem;
     }
 
     public V get(K key)  {
-        int hash = hash(key);
-        int index = findIndexInTheBucket(hash);
+        int index = hash(key, item);
         if (item[index] != null) {
             if (item[index].key.equals(key)) {
                 return (V) item[index].value;
@@ -65,8 +63,7 @@ public class SimpleHash<K, V> implements Iterable<K> {
     }
 
     public boolean delete(K key) {
-        int hash = hash(key);
-        int index = findIndexInTheBucket(hash);
+        int index = hash(key, item);
         if (item[index] != null) {
             if (item[index].key.equals(key)) {
                 item[index] = null;
