@@ -20,17 +20,20 @@ public class SimpleHash<K, V> implements Iterable<K> {
         return size;
     }
 
-    private int hash(K key, Node<K, V>[] item) {
-        int h = (key == null) ? 0 : (key.hashCode()) ^ (key.hashCode() >>> 16);
-        int findIndex = h & (item.length - 1);
-        return findIndex;
+    private int hash(K key) {
+        return (key == null) ? 0 : (key.hashCode()) ^ (key.hashCode() >>> 16);
+    }
+
+    private int findByIndex(K key, int itemLength) {
+        int h = hash(key);
+        return h & (itemLength - 1);
     }
 
     public boolean insert(K key, V value) {
         if ((double)(size / item.length) >= LOAD_FACTOR) {
-            increase();
+             increase();
         }
-        int index = hash(key, item);
+        int index = findByIndex(key, item.length);
         Node<K, V> newNode = new Node<>(index, key, value);
         if (item[index] == null) {
             item[index] = newNode;
@@ -46,14 +49,14 @@ public class SimpleHash<K, V> implements Iterable<K> {
         Node<K, V>[] newItem = new Node[newSize];
             for (Node<K, V> node : item) {
                 if (node != null) {
-                    newItem[hash(node.key, newItem)] = node;
+                    newItem[findByIndex(node.key, item.length)] = node;
                 }
         }
         item = newItem;
     }
 
     public V get(K key)  {
-        int index = hash(key, item);
+        int index = findByIndex(key, item.length);
         if (item[index] != null) {
             if (item[index].key.equals(key)) {
                 return (V) item[index].value;
@@ -63,7 +66,7 @@ public class SimpleHash<K, V> implements Iterable<K> {
     }
 
     public boolean delete(K key) {
-        int index = hash(key, item);
+        int index = findByIndex(key, item.length);
         if (item[index] != null) {
             if (item[index].key.equals(key)) {
                 item[index] = null;
