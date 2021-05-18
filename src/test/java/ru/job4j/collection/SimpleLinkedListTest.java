@@ -1,5 +1,5 @@
 package ru.job4j.collection;
-
+//
 import org.hamcrest.core.Is;
 import org.junit.Test;
 
