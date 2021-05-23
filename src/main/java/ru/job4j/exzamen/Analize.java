@@ -11,15 +11,15 @@ public class Analize {
     int deleted;
 
     public Info diff(List<User> previous, List<User> current) {
-        Map<Integer, User> prevUser = new HashMap<>();
+        Map<Integer, User> map = new HashMap<>();
         for (User prev : previous) {
-            prevUser.put(prev.getId(), prev);
-            for (User currU : current) {
-                if (prevUser.get(prev.getId()) == (current.get(currU.getId()))) {
-                    added++;
-                } else {
-                    changed++;
-                }
+            map.put(prev.getId(), prev);
+        }
+        for (User curr : current ) {
+            if (previous.get(curr.getId()) == current.get(curr.getId())) {
+                added++;
+            } else {
+                changed++;
             }
         }
         deleted = added + current.size() - changed;
