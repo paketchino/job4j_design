@@ -1,9 +1,6 @@
 package ru.job4j.exzamen;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Analize {
     int added;
@@ -15,14 +12,15 @@ public class Analize {
         for (User prev : previous) {
             map.put(prev.getId(), prev);
         }
-        for (User curr : current ) {
-            if (previous.get(curr.getId()) == current.get(curr.getId())) {
+        for (User curr : current) {
+            if (map.containsKey(curr.getId())) {
+                if (!map.containsValue(curr)) {
+                    changed++;
+                }
                 added++;
-            } else {
-                changed++;
             }
         }
-        deleted = added + current.size() - changed;
+        deleted = added - map.size() + changed;
         return new Info(added, changed, deleted);
     }
 
