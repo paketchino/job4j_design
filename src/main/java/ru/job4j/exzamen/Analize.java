@@ -14,16 +14,14 @@ public class Analize {
         }
         for (User curr : current) {
             if (mapPrevious.containsKey(curr.getId())) {
+                added++;
                 User user = mapPrevious.get(curr.getId());
                 if (!user.getName().equals(curr.getName())) {
                     changed++;
-                    added++;
-                } else {
-                    added++;
                 }
             }
+            deleted = mapPrevious.size() - added;
         }
-        deleted = added - current.size() + changed;
         return new Info(added, changed, deleted);
     }
 
