@@ -8,20 +8,17 @@ public class Analize {
     int deleted;
 
     public Info diff(List<User> previous, List<User> current) {
-        Map<Integer, User> mapPrevious = new HashMap<>();
+        Map<Integer, User> previousMap = new HashMap<>();
         for (User prev : previous) {
-            mapPrevious.put(prev.getId(),prev);
+            previousMap.put(prev.getId(), prev);
         }
         for (User curr : current) {
-            if (mapPrevious.containsKey(curr.getId())) {
-                added++;
-                User user = mapPrevious.get(curr.getId());
-                if (!user.getName().equals(curr.getName())) {
-                    changed++;
-                }
+            if (previousMap.containsKey(curr.getId()) && !previousMap.get(curr.getId()).equals(curr)) {
+                changed++;
             }
-            deleted = mapPrevious.size() - added;
         }
+        added = previous.size() - current.size();
+        deleted = previousMap.size() - added + changed;
         return new Info(added, changed, deleted);
     }
 
