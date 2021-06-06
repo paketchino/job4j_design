@@ -13,12 +13,15 @@ public class Analize {
             previousMap.put(prev.getId(), prev);
         }
         for (User curr : current) {
-            if (previousMap.containsKey(curr.getId()) && !previousMap.get(curr.getId()).equals(curr)) {
-                changed++;
+            if (previousMap.containsKey(curr.id)) {
+                if (!previousMap.get(curr.id).getName().equals(curr.getName())) {
+                    changed++;
+                }
+            } else {
+                added++;
             }
         }
-        added = previous.size() - current.size();
-        deleted = previousMap.size() - added + changed;
+        deleted = previousMap.size() - previous.size() + current.size() + changed;
         return new Info(added, changed, deleted);
     }
 
