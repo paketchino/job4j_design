@@ -3,6 +3,7 @@ package ru.job4j.io.output;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -26,21 +27,19 @@ public class Config {
                 if (!line.isEmpty() && !line.startsWith("#")) {
                     String []val = line.split("=");
                     if (val.length == 1) {
-                        throw new IllegalStateException();
+                        throw new IllegalArgumentException();
                     }
                     values.put(val[0], val[1]);
                 }
+                line = read.readLine();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public String value(String key) {
-        if (values.containsKey(key)) {
-            return values.get(key);
-        }
-        throw new UnsupportedOperationException("Don't impl this method yet!");
+        return values.get(key);
     }
 
     @Override
@@ -56,7 +55,6 @@ public class Config {
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines().forEach(out::add);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
