@@ -14,7 +14,7 @@ public class Search {
         if (args.length == 0) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
-        if (args.length == 1 || args[1].isEmpty()) {
+        if (args[0].isEmpty() || args[1].isEmpty()) {
             throw new IllegalArgumentException("This expansion not found");
         }
         Path start = Paths.get(args[0]);
