@@ -1,4 +1,4 @@
-package ru.job4j.io;
+package ru.job4j.io.output;
 
 import java.io.FileOutputStream;
 
@@ -14,16 +14,15 @@ public class Matrix {
     }
 }
 
-
 class Result {
     public static void main(String[] args) {
         try (FileOutputStream out = new FileOutputStream("result.txt")) {
             int[][] table = Matrix.multiple(9);
             for (int i = 0; i < table.length; i++) {
                 for (int j = 0; j < table.length; j++) {
-                    out.write(table[i][j]);
+                    out.write(String.valueOf(table[i][j]).getBytes());
                 }
-                out.write("\n".getBytes());
+                out.write(System.lineSeparator().getBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
