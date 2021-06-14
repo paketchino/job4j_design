@@ -20,7 +20,7 @@ public class ArgsName {
             if (temp.length < 2) {
                 throw new IllegalArgumentException();
             }
-            values.put(args[0], args[1]);
+            values.put(temp[0].substring(1), temp[1]);
         }
     }
 
