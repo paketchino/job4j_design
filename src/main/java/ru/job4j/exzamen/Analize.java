@@ -7,7 +7,7 @@ public class Analize {
     int changed;
     int deleted;
 
-    public Info diff(List<User> previous, List<User> current) {
+    public Info diff(Set<User> previous, Set<User> current) {
         Map<Integer, User> previousMap = new HashMap<>();
         for (User prev : previous) {
             previousMap.put(prev.getId(), prev);
@@ -21,7 +21,7 @@ public class Analize {
                 added++;
             }
         }
-        deleted = previousMap.size() - previous.size() + current.size() + changed;
+        deleted = previous.size() - current.size() + changed;
         return new Info(added, changed, deleted);
     }
 
@@ -36,11 +36,14 @@ public class Analize {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             User user = (User) o;
-            return id == user.id &&
-                    Objects.equals(name, user.name);
+            return id == user.id && Objects.equals(name, user.name);
         }
 
         @Override
@@ -71,12 +74,16 @@ public class Analize {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             Info info = (Info) o;
-            return added == info.added &&
-                    changed == info.changed &&
-                    deleted == info.deleted;
+            return added == info.added
+                    && changed == info.changed
+                    && deleted == info.deleted;
         }
 
         @Override
