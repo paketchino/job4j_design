@@ -9,11 +9,11 @@ public class Analize {
         try (BufferedReader br = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(
                      new BufferedOutputStream(
-                             new FileOutputStream(target)   ))) {
+                             new FileOutputStream(target)))) {
             String read = br.readLine();
             while (read != null) {
                 if (!read.isEmpty()) {
-                    String []val = read.split(" ");
+                    String[] val = read.split(" ");
                     if (val.length == 1) {
                         throw new IllegalArgumentException();
                     }
