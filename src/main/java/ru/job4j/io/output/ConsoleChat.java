@@ -2,10 +2,7 @@ package ru.job4j.io.output;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleChat {
     private final String path;
@@ -15,16 +12,20 @@ public class ConsoleChat {
     private static final String CONTINUE = "continue";
     private final List<String> log = new ArrayList<>();
     private final List<String> fileBot = new ArrayList<>();
+    int count;
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;
     }
 
-    private List<String> readPhrases(String path) {
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(path, Charset.forName("Windows-1251")))) {
-                reader.lines().forEach(sb::append);
+    private List<String> readPhrases() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("./data/botFile.txt", Charset.forName("Windows-1251")))) {
+            String read;
+            while ((read = reader.readLine()) != null) {
+                fileBot.add(read);
+                count++;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,28 +43,32 @@ public class ConsoleChat {
     }
 
     private String randomWords() {
-        int randomIndex = (int) (Math.random() * fileBot.size() - 1);
+        int randomIndex = (int) (Math.random() * count - 1);
         return fileBot.get(randomIndex);
     }
-
 
     public void run() {
         System.out.println("Enter a phrases");
         boolean botCanAnswer = true;
         Scanner sc = new Scanner(System.in);
+        String phrases = randomWords();
         String question = sc.nextLine();
-        readPhrases(fileBot.toString());
+        readPhrases();
         while (!question.equals(OUT)) {
-            randomWords();
             if (question.equals(STOP)) {
                 botCanAnswer = false;
             }
-            if (!botCanAnswer) {
+            if (question.equals(CONTINUE)) {
+                botCanAnswer = true;
                 log.add(question);
             }
-            writeDateInFile(question, log);
+            if (botCanAnswer) {
+                System.out.println(phrases);
+                log.add(question);
+            }
             question = sc.nextLine();
         }
+        writeDateInFile(question, log);
     }
 
 
