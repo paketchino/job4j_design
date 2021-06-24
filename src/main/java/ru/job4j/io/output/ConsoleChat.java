@@ -3,6 +3,7 @@ package ru.job4j.io.output;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConsoleChat {
     private final String path;
@@ -14,13 +15,14 @@ public class ConsoleChat {
     private final List<String> fileBot = new ArrayList<>();
     int count;
 
+
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;
     }
 
     private List<String> readPhrases() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("./data/botFile.txt", Charset.forName("Windows-1251")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(this.botAnswers, Charset.forName("Windows-1251")))) {
             String read;
             while ((read = reader.readLine()) != null) {
                 fileBot.add(read);
@@ -32,7 +34,7 @@ public class ConsoleChat {
         return fileBot;
     }
 
-    private void writeDateInFile(String path, List<String> log) {
+    private void writeDateInFile(List<String> log) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("Windows-1251")))) {
             for (String datum : log) {
                 pw.println(datum);
@@ -43,7 +45,7 @@ public class ConsoleChat {
     }
 
     private String randomWords() {
-        int randomIndex = (int) (Math.random() * count - 1);
+        int randomIndex = (int) (Math.random() * count);
         return fileBot.get(randomIndex);
     }
 
@@ -51,10 +53,10 @@ public class ConsoleChat {
         System.out.println("Enter a phrases");
         boolean botCanAnswer = true;
         Scanner sc = new Scanner(System.in);
-        String phrases = randomWords();
         String question = sc.nextLine();
-        readPhrases();
         while (!question.equals(OUT)) {
+            readPhrases();
+            String phrases = randomWords();
             if (question.equals(STOP)) {
                 botCanAnswer = false;
             }
@@ -68,12 +70,12 @@ public class ConsoleChat {
             }
             question = sc.nextLine();
         }
-        writeDateInFile(question, log);
+        writeDateInFile(log);
     }
 
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("dialogWithBot.txt","./data/botFile.txt");
+        ConsoleChat cc = new ConsoleChat("./data/dialogWithBot.txt","./data/botFile.txt");
         cc.run();
     }
 }
