@@ -54,8 +54,8 @@ public class ConsoleChat {
         boolean botCanAnswer = true;
         Scanner sc = new Scanner(System.in);
         String question = sc.nextLine();
+        readPhrases();
         while (!question.equals(OUT)) {
-            readPhrases();
             String phrases = randomWords();
             if (question.equals(STOP)) {
                 botCanAnswer = false;
