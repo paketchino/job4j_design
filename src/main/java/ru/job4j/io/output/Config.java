@@ -20,12 +20,11 @@ public class Config {
     }
 
     public void load() {
-        try (BufferedReader read = new BufferedReader (
-                new FileReader(this.path))) {
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             String line = read.readLine();
             while (line != null) {
                 if (!line.isEmpty() && !line.startsWith("#")) {
-                    String []val = line.split("=");
+                    String[] val = line.split("=");
                     if (val.length == 1) {
                         throw new IllegalArgumentException();
                     }
@@ -44,8 +43,12 @@ public class Config {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Config config = (Config) o;
         return Objects.equals(path, config.path) && Objects.equals(values, config.values);
     }

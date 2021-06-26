@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class SimpleHashTest {
 
     @Test
-    public void WhenInsert() {
+    public void whenInsert() {
         SimpleHash<Integer, String> hash = new SimpleHash<>(3);
         hash.insert(1, "Roman");
         hash.insert(2, "Evgen");

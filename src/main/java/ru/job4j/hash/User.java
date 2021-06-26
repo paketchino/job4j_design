@@ -23,7 +23,7 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (! (o instanceof User)) {
+        if (!(o instanceof User)) {
             return false;
         }
         if (this == o) {

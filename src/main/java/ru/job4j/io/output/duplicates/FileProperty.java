@@ -30,8 +30,12 @@ public class FileProperty {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())  {
+            return false;
+        }
         FileProperty that = (FileProperty) o;
         return size == that.size && Objects.equals(name, that.name);
     }
@@ -43,9 +47,8 @@ public class FileProperty {
 
     @Override
     public String toString() {
-        return "FileProperty{" +
-                "size=" + size +
-                ", name='" + name + '\'' +
-                '}';
+        return "FileProperty{" + "size="
+                + size + ", name='" + name
+                + '\'' + '}';
     }
 }

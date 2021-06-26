@@ -1,9 +1,10 @@
 package ru.job4j.io.output;
-//
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
-import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConsoleChat {
     private final String path;
@@ -75,7 +76,7 @@ public class ConsoleChat {
 
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("./data/dialogWithBot.txt","./data/botFile.txt");
+        ConsoleChat cc = new ConsoleChat("./data/dialogWithBot.txt", "./data/botFile.txt");
         cc.run();
     }
 }

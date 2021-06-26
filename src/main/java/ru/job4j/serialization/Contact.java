@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.util.Objects;
 
 public class Contact implements Serializable {
-    private static final long serialVersion = 1L;
+    private static final long serialVersionUID = 1L;
     private final int zipcode;
     private String phone;
 
@@ -23,9 +23,18 @@ public class Contact implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(zipcode, phone);
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)  {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Contact contact = (Contact) o;
         return zipcode == contact.zipcode && Objects.equals(phone, contact.phone);
     }
@@ -33,10 +42,10 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "zipcode=" + zipcode +
-                ", phone='" + phone + '\'' +
-                '}';
+        return "Contact{" + "zipcode="
+                + zipcode + ", phone='"
+                + phone + '\''
+                + '}';
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {

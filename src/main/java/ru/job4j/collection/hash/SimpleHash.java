@@ -30,7 +30,7 @@ public class SimpleHash<K, V> implements Iterable<K> {
     }
 
     public boolean insert(K key, V value) {
-        if ((double)(size / item.length) >= LOAD_FACTOR) {
+        if ((double) (size / item.length) >= LOAD_FACTOR) {
              increase();
         }
         int index = findByIndex(key, item.length);
