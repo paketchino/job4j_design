@@ -36,5 +36,19 @@ public class University {
 
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(university));
+        final String univesityJson =
+                "{"
+                        + "\"deducted\" : false,"
+                        + "\"score\" :5,"
+                        + "\"teacher\":\"Petr\","
+                        + "\"student\":"
+                            + "{"
+                                + "\"age\":20"
+                            + "},"
+                        + "\"subjects\":"
+                            + "[\"JSOM\",\"JAVA\"]"
+                + "}";
+        final University universityMod = gson.fromJson(univesityJson, University.class);
+        System.out.println(universityMod);
     }
 }
