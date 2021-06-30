@@ -1,13 +1,23 @@
 package ru.job4j.serialization.jsom;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "student")
 public class Student {
-    private final int age;
-    private final String name;
+    @XmlAttribute
+    private int age;
+
+    @XmlAttribute
+    private String name;
 
     public Student(int age, String name) {
         this.age = age;
         this.name = name;
     }
+
+    Student() {}
 
     @Override
     public String toString() {

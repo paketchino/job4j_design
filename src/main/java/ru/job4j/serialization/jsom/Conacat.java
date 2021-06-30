@@ -1,11 +1,19 @@
 package ru.job4j.serialization.jsom;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "concat")
 public class Conacat {
-    private final String phone;
+
+    @XmlAttribute
+    private String phone;
 
     public Conacat(String phone) {
         this.phone = phone;
     }
+
+    public Conacat() {}
 
     @Override
     public String toString() {
