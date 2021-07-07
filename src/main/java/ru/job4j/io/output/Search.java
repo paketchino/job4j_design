@@ -1,5 +1,5 @@
 package ru.job4j.io.output;
-
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

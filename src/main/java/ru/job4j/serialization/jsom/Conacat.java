@@ -9,6 +9,14 @@ public class Conacat {
     @XmlAttribute
     private String phone;
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Conacat(String phone) {
         this.phone = phone;
     }
