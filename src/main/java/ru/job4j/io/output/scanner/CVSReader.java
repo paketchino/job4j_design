@@ -4,6 +4,7 @@ import ru.job4j.io.output.ArgsName;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -12,16 +13,18 @@ public class CVSReader {
 
     private Set<Integer> readHeader(String header, String filter, String delimiter) {
         Set<Integer> storageData = new HashSet<>();
-        try (var scanner = new Scanner(new ByteArrayInputStream(header.getBytes()))
-                .useDelimiter(delimiter)) {
-            while (scanner.hasNext()) {
-                String column = scanner.next();
-                String[] tempStorage = column.split(",");
-                for (int i = 0; i < tempStorage.length; i++) {
-                    if (tempStorage[i].equals(filter)) {
-                        int index = Integer.parseInt(tempStorage[i]);
-                        storageData.add(index);
-                    }
+        String[] headers = header.split(delimiter);
+        Set<String> filters = new HashSet<>(Arrays.asList(filter.split(",")));
+        for (int i = 0; i < headers.length; i++) {
+            if (filters.contains(headers[i])) {
+                storageData.add(i);
+            }
+        }
+        try (var scanner = new Scanner(new ByteArrayInputStream(header.getBytes()))) {
+            String[] tmp = scanner.next().split(delimiter);
+            for (int i = 0; i < tmp.length; i++) {
+                if (tmp[i].contains(filter)) {
+                    storageData.add(i);
                 }
             }
         }
@@ -43,6 +46,5 @@ public class CVSReader {
                 reader.readHeader(argsValue.getKey("path"),
                         argsValue.getKey("filter"),
                         argsValue.getKey("delimiter")));
-
     }
 }
