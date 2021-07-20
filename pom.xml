@@ -78,10 +78,10 @@
                     <goal>shade</goal>
                 </goals>
                 <configuration>
-                    <finalName>duplicatesFinder</finalName>
+                    <finalName>csvReader</finalName>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>ru.job4j.io.output.duplicates.DuplicatesFinder</mainClass>
+                            <mainClass>job4j.io.output.scanner.CVSReader</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>

@@ -4,14 +4,13 @@ import ru.job4j.io.output.ArgsName;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class CVSReader {
 
-    private Set<Integer> readHeader(String header, String filter, String delimiter) {
+    private final List<String> outFields = new ArrayList<>();
+
+    public Set<Integer> readHeader(String header, String delimiter, String out, String filter) {
         Set<Integer> storageData = new HashSet<>();
         String[] headers = header.split(delimiter);
         Set<String> filters = new HashSet<>(Arrays.asList(filter.split(",")));
@@ -24,15 +23,21 @@ public class CVSReader {
             String[] tmp = scanner.next().split(delimiter);
             for (int i = 0; i < tmp.length; i++) {
                 if (tmp[i].contains(filter)) {
-                    storageData.add(i);
+                    outFields.add(tmp[i]);
+                    outFields.add(" ");
                 }
+            }
+            if (out.equals("stdout")) {
+                outFields.forEach(System.out::println);
+            } else {
+                writeInFile(outFields);
             }
         }
         return storageData;
     }
 
-    public void writeInFile(String out, Set<Integer> file) {
-        try(PrintWriter pw = new PrintWriter(new FileWriter(out))) {
+    private void writeInFile(List<String> file) {
+        try(PrintWriter pw = new PrintWriter(new FileWriter(file.toString()))) {
             file.forEach(pw::println);
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,9 +47,6 @@ public class CVSReader {
     public static void main(String[] args) throws IOException {
         ArgsName argsValue = ArgsName.of(args);
         CVSReader reader = new CVSReader();
-        reader.writeInFile(argsValue.getKey("out"),
-                reader.readHeader(argsValue.getKey("path"),
-                        argsValue.getKey("filter"),
-                        argsValue.getKey("delimiter")));
+        reader.readHeader(argsValue.getKey("path"), argsValue.getKey("delimiter"), argsValue.getKey("out"), argsValue.getKey("filter"));
     }
 }
