@@ -1,0 +1,9 @@
+
+insert into persons(name, age, salary) values('Maks', '23', '1');
+select * from persons;
+
+update persons set name = 'roman';
+select * from persons;
+
+delete from persons;
+select * from persons;
