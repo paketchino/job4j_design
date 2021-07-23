@@ -1,0 +1,15 @@
+create table signature(
+	id serial primary key,
+	name varchar(255)
+);
+
+create table person(
+	id serial primary key,
+	name varchar(255)
+);
+
+create table signatute_persons(
+	id serial primary key,
+	signatute_id int references signature(id) unique,
+	person_id int references person(id) unique
+);
