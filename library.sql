@@ -1,42 +1,42 @@
 create table author (
 	id serial primary key,
-	name varchar(255)
+	name_author varchar(255)
 );
 
 create table books (
 	id serial primary key,
-	name varchar(255),
+	title varchar(255),
 	author_id int references author(id) unique
 );
 
-create table shelves (
+create table visitor (
 	id serial primary key,
-	name varchar(255),
-	books_id int references books(id)
+	users varchar(255),
+	books_id int references books (id) unique
 );
 
-insert into author (name) values ('Sanya');
-insert into author (name) values ('Lev Tolstoy');
-insert into author (name) values ('Alexsey');
-insert into author (name) values ('Roman');
 
-insert into books (name, author_id) values ('War and Peace', 2);
-insert into books (name, author_id) values ('Gone Girl', 1);
-insert into books (name, author_id) values ('The Door into Summer', 3);
-insert into books (name, author_id) values ('Harry Potter', 4);
-insert into books (name) values ('Adventure Time');
+insert into author (name_author) values ('Sanya');
+insert into author (name_author) values ('Lev Tolstoy');
+insert into author (name_author) values ('Alexsey');
+insert into author (name_author) values ('Roman');
 
-insert into shelves (name, books_id) values ('A1', 1);
-insert into shelves (name, books_id) values ('A1', 2);
-insert into shelves (name, books_id) values ('A1', 3);
-insert into shelves (name, books_id) values ('A1', 4);
-insert into shelves (name, books_id) values ('A2', 5);
+insert into books (title, author_id) values ('War and Peace', 2);
+insert into books (title, author_id) values ('Gone Girl', 1);
+insert into books (title, author_id) values ('The Door into Summer', 3);
+insert into books (title, author_id) values ('Harry Potter', 4);
+insert into books (title) values ('Adventure Time');
 
-select ss.name as Полка, b.name as Книги, b.author_id as Автор 
-from shelves as ss join books as b on ss.books_id = b.id;
+insert into visitor (users, books_id) values ('User #1', 1);
+insert into visitor (users, books_id) values ('User #2', 1);
+insert into visitor (users, books_id) values ('User #3', 3);
+insert into visitor (users) values ('User #4');
 
-select bk.name as Книги, a.name as Автор 
-from books as bk join author as a on bk.author_id = a.id;
+select bk.title as Название, a.name_author as Автор 
+from books as bk inner join author as a on bk.author_id = a.id;
 
-select a.name as Автор, b.name Книги
-from author as a join books as b on b.author_id = a.id and a.name = 'Lev Tolstoy';
+select vs.users as Посетитель, bk.title as Название, bk.author_id as Автор
+from visitor as vs inner join books as bk on vs.books_id = bk.id;
+
+select a.name_author as Автор, b.title Книги
+from author as a join books as b on b.author_id = a.id and a.name_author = 'Lev Tolstoy';
