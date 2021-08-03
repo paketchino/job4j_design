@@ -13,7 +13,7 @@ public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         config.load();
-        String url = config.value("jdbc:postgresql://localhost:5432/idea_db");
+        String url = config.value("connection.url");
         String login = config.value("connection.user");
         String password = config.value("connection.password");
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
