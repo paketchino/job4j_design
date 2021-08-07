@@ -1,16 +1,10 @@
 package ru.job4j.sql;
 
-import org.postgresql.jdbc.PgConnection;
-import ru.job4j.socket.EchoServer;
-
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.StringJoiner;
 
@@ -22,34 +16,21 @@ public class TableEditor implements AutoCloseable {
 
     private Connection connection;
 
-    private static Properties properties;
+    private Properties properties;
 
     public TableEditor(Properties properties) throws Exception {
-        TableEditor.properties = properties;
+        this.properties = properties;
         initConnection();
     }
 
-    public static String getValue(String key) {
-        return properties.getProperty(key);
-    }
-
-    public void load(InputStream io) {
-        try {
-            TableEditor.properties.load(io);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection initConnection() throws Exception {
+    private void initConnection() throws Exception {
         Class.forName("org.postgresql.Driver");
-        return DriverManager.getConnection(
-                TableEditor.getValue(URL_KEY),
-                TableEditor.getValue(URL_LOGIN),
-                TableEditor.getValue(URL_PASSWORD)
+        connection = DriverManager.getConnection(
+                 properties.getProperty(URL_KEY),
+                 properties.getProperty(URL_LOGIN),
+                 properties.getProperty(URL_PASSWORD)
         );
     }
-
 
     private void setConnection(String sql) {
         try (Statement statement = connection.createStatement()) {
@@ -107,5 +88,18 @@ public class TableEditor implements AutoCloseable {
             }
         }
         return buffer.toString();
+    }
+
+    public static void main(String[] args) throws Exception {
+        Properties properties = new Properties();
+        ClassLoader loader = TableEditor.class.getClassLoader();
+        try (InputStream io = loader.getResourceAsStream("connection.properties")) {
+            properties.load(io);
+        }
+        String tablename = "test_table1";
+        try (TableEditor editor = new TableEditor(properties)) {
+            editor.createTable(tablename);
+            System.out.println(getTableScheme(editor.connection, tablename));
+        }
     }
 }
