@@ -99,13 +99,16 @@ public class PrepareStatementDemo {
         demo.insert(city1);
         City city2 = new City(2, "Penza",256);
         demo.insert(city2);
-//        List<City> findAll = demo.findAll();
-//        for (City c : findAll) {
-//            System.out.println(c.getId() + " " + c.getName() + " " + c.getPopulation());
-//        }
-        List<City> findAll2 = demo.findAll();
-        for (City c: findAll2) {
-            System.out.println(c.getName() + " " + c.getPopulation());
+        List<City> findAll = demo.findAll();
+        for (City c : findAll) {
+            System.out.println(c.getId() + " " + c.getName() + " " + c.getPopulation());
         }
+        List<City> findAll2 = demo.findAll();
+        System.out.println(demo.update(city1));
+        demo.delete(city1);
+        System.out.println(demo.update(city1));
+ //       for (City c: findAll2) {
+ //           System.out.println(c.getName() + " " + c.getPopulation());
+  //      }
     }
 }
