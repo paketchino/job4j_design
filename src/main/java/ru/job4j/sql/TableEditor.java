@@ -25,11 +25,16 @@ public class TableEditor implements AutoCloseable {
 
     private void initConnection() throws Exception {
         Class.forName("org.postgresql.Driver");
-        connection = DriverManager.getConnection(
-                 properties.getProperty(URL_KEY),
-                 properties.getProperty(URL_LOGIN),
-                 properties.getProperty(URL_PASSWORD)
-        );
+        try (InputStream io = TableEditor.class.getClassLoader().getResourceAsStream("connection.properties")) {
+            properties.load(io);
+            connection = DriverManager.getConnection(
+                    properties.getProperty(URL_KEY),
+                    properties.getProperty(URL_LOGIN),
+                    properties.getProperty(URL_PASSWORD)
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setConnection(String sql) {
@@ -42,27 +47,27 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable (String tableName) {
-        String sql = String.format("create table if not exist %s();", tableName);
+        String sql = String.format("create table if not exist %s()", tableName);
         setConnection(sql);
     }
 
     public void dropTable(String tableName) {
-        String sql = String.format("drop table if exists %s;", tableName);
+        String sql = String.format("drop table if exists %s", tableName);
         setConnection(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        String sql = String.format("alter table %s add %s %s;", tableName, columnName, type);
+        String sql = String.format("alter table %s add %s %s", tableName, columnName, type);
         setConnection(sql);
     }
 
     public void dropColumn(String tableName, String columnName) {
-        String sql = String.format("alter table %s drop column %s;", tableName, columnName);
+        String sql = String.format("alter table %s drop column %s", tableName, columnName);
         setConnection(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        String sql = String.format("alter table %s change '%s '%s;", tableName, columnName, newColumnName);
+        String sql = String.format("alter table %s change '%s '%s", tableName, columnName, newColumnName);
         setConnection(sql);
     }
 
@@ -91,15 +96,14 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
+        Class.forName("org.postgresql.Driver");
         Properties properties = new Properties();
-        ClassLoader loader = TableEditor.class.getClassLoader();
-        try (InputStream io = loader.getResourceAsStream("connection.properties")) {
-            properties.load(io);
-        }
-        String tablename = "test_table1";
         try (TableEditor editor = new TableEditor(properties)) {
-            editor.createTable(tablename);
-            System.out.println(getTableScheme(editor.connection, tablename));
+            editor.createTable("test_table1");
+            editor.addColumn("test_table1", "name", "text");
+            System.out.println(getTableScheme(editor.connection, "test_table1"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
