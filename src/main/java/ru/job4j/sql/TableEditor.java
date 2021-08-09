@@ -1,10 +1,9 @@
 package ru.job4j.sql;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
 
@@ -25,7 +24,7 @@ public class TableEditor implements AutoCloseable {
 
     private void initConnection() throws Exception {
         Class.forName("org.postgresql.Driver");
-        try (InputStream io = TableEditor.class.getClassLoader().getResourceAsStream("connection.properties")) {
+       try (InputStream io = TableEditor.class.getClassLoader().getResourceAsStream("connection.properties")) {
             properties.load(io);
             connection = DriverManager.getConnection(
                     properties.getProperty(URL_KEY),
@@ -34,7 +33,7 @@ public class TableEditor implements AutoCloseable {
             );
         } catch (Exception e) {
             e.printStackTrace();
-        }
+       }
     }
 
     private void setConnection(String sql) {
@@ -47,7 +46,7 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable (String tableName) {
-        String sql = String.format("create table if not exist %s()", tableName);
+        String sql = String.format("create table if not exists %s()", tableName);
         setConnection(sql);
     }
 
@@ -67,7 +66,7 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        String sql = String.format("alter table %s change '%s '%s", tableName, columnName, newColumnName);
+        String sql = String.format("alter table %s rename column %s to %s", tableName, columnName, newColumnName);
         setConnection(sql);
     }
 
@@ -82,8 +81,8 @@ public class TableEditor implements AutoCloseable {
         var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
         buffer.add(header);
         try (var statement = connection.createStatement()) {
-            var selection = statement.executeQuery(String.format(
-                    "select * from %s limit 1", tableName
+          var selection = statement.executeQuery(String.format(
+                   "select * from %s limit 1", tableName
             ));
             var metaData = selection.getMetaData();
             for (int i = 1; i <= metaData.getColumnCount(); i++) {
@@ -96,12 +95,19 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
-        Class.forName("org.postgresql.Driver");
         Properties properties = new Properties();
+        try (InputStream io = TableEditor.class.getClassLoader().getResourceAsStream("connection.properties")) {
+            properties.load(io);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try (TableEditor editor = new TableEditor(properties)) {
-            editor.createTable("test_table1");
-            editor.addColumn("test_table1", "name", "text");
-            System.out.println(getTableScheme(editor.connection, "test_table1"));
+            editor.createTable("test_table2");
+            editor.addColumn("test_table2", "name", "text");
+            //editor.dropTable("test_table1");
+            //editor.dropColumn("test_table1", "name");
+            editor.renameColumn("test_table2", "name", "newName");
+            System.out.println(getTableScheme(editor.connection, "test_table2"));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,0 +1,26 @@
+create table type (
+	id serial primary key,
+	type varcar(255)
+);
+
+create table product (
+	id serial primary key,
+	name_product varchar(255), 
+	type_id int references type(id),
+	expired_date data,
+	price_in_rub float
+);
+insert into type (type) values ('Oil');
+insert into type (type) values ('Dairy');
+insert into type (type) values ('High carbohydrate product');
+insert into type (type) values ('High protein product');
+
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Bread', 3, 30.07.2021, 30);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Egg', 4, 01.08.2021, 40);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Milk', 2, 30.06.2021, 80);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Oil', 1, 01.08.2021, 160.99);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Banan', 3, 01.10.2021, 85.00);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Potato', 3, 29.09.2021, 56.00);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Pie', 3, 08.08.2021, 29.99);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Cheeze', 2, 08.08.2022, 1850.99);
+insert into product (name_product, type_id, expired_date, price_in_rub) values ('Kefir', 2, 01.05.2021, 61.99);
