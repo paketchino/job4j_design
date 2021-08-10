@@ -25,8 +25,8 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader bf = new BufferedReader(new FileReader(dump))) {
-            String read = bf.readLine();
-            while (read != null) {
+            String read;
+            while ((read = bf.readLine()) != null) {
                 if (read.isEmpty() || read.length() < 2) {
                     throw new IllegalArgumentException();
                 }
@@ -44,7 +44,8 @@ public class ImportDB {
                 cfg.getProperty("jdbc.username"),
                 cfg.getProperty("jdbc.password"))) {
             for (User user : users) {
-                try (PreparedStatement preparedStatement = connection.prepareStatement("insert into users (name, email) values (?, ?)")) {
+                try (PreparedStatement preparedStatement =
+                             connection.prepareStatement("insert into users.sql (name, email) values (?, ?)")) {
                     preparedStatement.setString(1, user.getName());
                     preparedStatement.setString(2, user.getEmail());
                     preparedStatement.execute();
@@ -75,7 +76,7 @@ public class ImportDB {
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         Properties cfg = new Properties();
         ClassLoader loader = ImportDB.class.getClassLoader();
-        try (InputStream io = loader.getResourceAsStream("./config.properties")) {
+        try (InputStream io = loader.getResourceAsStream("config.properties")) {
             cfg.load(io);
         } catch (Exception e) {
             e.printStackTrace();
