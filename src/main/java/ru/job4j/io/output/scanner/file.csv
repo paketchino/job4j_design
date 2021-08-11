@@ -1,1 +1,7 @@
-name, age, birthDate, education, children
+name;age;children;
+roman,20,nohave
+arsen,30,hava
+kiriil,40,hava
+stas,25,hava
+alexey,65,hava
+anton,24,hava

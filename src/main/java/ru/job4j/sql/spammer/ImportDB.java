@@ -27,11 +27,11 @@ public class ImportDB {
         try (BufferedReader bf = new BufferedReader(new FileReader(dump))) {
             String read;
             while ((read = bf.readLine()) != null) {
-                if (read.isEmpty() || read.length() < 2) {
-                    throw new IllegalArgumentException();
+                if (read.isEmpty()) {
+                    continue;
                 }
-                    String[] lines = read.split(";");
-                    users.add(new User(lines[0], lines[1]));
+                String[] lines = read.split(";");
+                users.add(new User(lines[0], lines[1]));
                 }
             }
          return users;
