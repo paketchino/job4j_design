@@ -81,7 +81,7 @@ public class ImportDB {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ImportDB importDB = new ImportDB(cfg, "./dump.txt");
+        ImportDB importDB = new ImportDB(cfg, "C:\\projects\\job4j_design\\src\\main\\java\\ru\\job4j\\sql\\spammer\\dump.txt");
         importDB.save(importDB.load());
     }
 }
