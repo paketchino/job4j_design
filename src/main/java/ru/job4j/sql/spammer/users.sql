@@ -1,5 +1,5 @@
 create table if not exists users1 (
 	id serial primary key,
-	text name,
-	email name
+	person varchar(255),
+	email varchar(55)
 )
