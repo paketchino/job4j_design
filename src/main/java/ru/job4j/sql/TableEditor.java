@@ -24,7 +24,8 @@ public class TableEditor implements AutoCloseable {
 
     private void initConnection() throws Exception {
         Class.forName("org.postgresql.Driver");
-       try (InputStream io = TableEditor.class.getClassLoader().getResourceAsStream("connection.properties")) {
+       try (InputStream io = TableEditor.class.getClassLoader()
+               .getResourceAsStream("connection.properties")) {
             properties.load(io);
             connection = DriverManager.getConnection(
                     properties.getProperty(URL_KEY),

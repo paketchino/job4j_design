@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDemo {
-    private static Config config = new Config("app.properties");
+    private static Config config = new Config("test.properties");
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");

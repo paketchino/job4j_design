@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.function.BinaryOperator;
 
 public class ImportDB {
 
@@ -55,6 +56,7 @@ public class ImportDB {
     }
 
     private class User {
+
 
         private String person;
         private String email;

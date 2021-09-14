@@ -8,9 +8,8 @@ public class Elevator {
 
     private static final String OUT = "out";
 
-    private static final int[] LEVEL = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-
     public static void run() {
+        int result = 0;
         int number = 0;
         int elevator3 = 1;
         int elevator1 = 1;
@@ -34,38 +33,28 @@ public class Elevator {
                     System.out.println("Неправильно введеное значение");
                     continue;
                 }
-                System.out.println("Вызывается ближайший лифт");
+                int conditionOne = Math.abs(elevator3 - currentFlor);
+                int conditionTwo = Math.abs(elevator2 - currentFlor);
                 if (currentFlor == elevator1) {
                     System.out.println("Вызывается первый лифт");
-                }
-                if (currentFlor >= 2) {
-                    if ((elevator3 - currentFlor) == (elevator2 - currentFlor)) {
-                        System.out.println("Вызывается второй лифт");
-                    }
-                    if ((elevator2 - currentFlor) < (elevator3 - currentFlor)) {
-                        System.out.println("Вызывается второй лифт");
-                    }
-                    if ((elevator3 - currentFlor) < (elevator2 - currentFlor)) {
+                    result = finishFlor;
+                    System.out.println("Мы прибыли на " + result +  " этаж");
+                } else if ((conditionOne == conditionTwo) ||
+                        (conditionTwo < conditionOne)) {
+                    System.out.println("Вызывается второй лифт");
+                    result = finishFlor;
+                    System.out.println("Мы прибыли на " + result +  " этаж");
+                    elevator2 = currentFlor;
+                    currentFlor = finishFlor;
+                    finishFlor = currPostElev2;
+                    } else {
                         System.out.println("Вызывается третий лифт");
-                    }
+                        result = finishFlor;
+                        System.out.println("Мы прибыли на " + result +  " этаж");
+                        elevator3 = currentFlor;
+                        currentFlor = finishFlor;
+                        finishFlor = currPostElev3;
                 }
-                if (currentFlor < finishFlor) {
-                    for (int i = currentFlor; i < LEVEL[finishFlor - 1]; i++) {
-                        number = LEVEL[currentFlor];
-                        System.out.println("Мы находимся на " + number + " этаже");
-                        currentFlor++;
-                    }
-                }
-                if (finishFlor > currentFlor) {
-                    for (int i = currentFlor; i > LEVEL[finishFlor - 1]; i--) {
-                        number = LEVEL[finishFlor];
-                        System.out.println("Мы находимся на " + number + " этаже");
-                        currentFlor--;
-                    }
-                }
-//                elevator2 = currentFlor;
-//                currentFlor = finishFlor;
-//                finishFlor = currPostElev2;
             }
             button = sc.next();
         }
