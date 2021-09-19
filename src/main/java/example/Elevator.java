@@ -1,5 +1,5 @@
 package example;
-
+//
 import java.util.Scanner;
 
 public class Elevator {
