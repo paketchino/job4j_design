@@ -9,14 +9,12 @@ public class Elevator {
     private static final String OUT = "out";
 
     public static void run() {
-        int result = 0;
-        int number = 0;
         int elevator3 = 1;
         int elevator1 = 1;
         int elevator2 = 1;
-        int currPostElev1 = 0;
-        int currPostElev2 = 0;
-        int currPostElev3 = 0;
+        int currPostElev2 = elevator2;
+        int currPostElev3 = elevator3;
+        int result = 0;
         Scanner sc = new Scanner(System.in);
         String button = sc.next();
         while (!button.equals(OUT)) {
@@ -33,27 +31,47 @@ public class Elevator {
                     System.out.println("Неправильно введеное значение");
                     continue;
                 }
-                int conditionOne = Math.abs(elevator3 - currentFlor);
+                int conditionThree = Math.abs(elevator3 - currentFlor);
                 int conditionTwo = Math.abs(elevator2 - currentFlor);
                 if (currentFlor == elevator1) {
                     System.out.println("Вызывается первый лифт");
                     result = finishFlor;
                     System.out.println("Мы прибыли на " + result +  " этаж");
-                } else if ((conditionOne == conditionTwo) ||
-                        (conditionTwo < conditionOne)) {
-                    System.out.println("Вызывается второй лифт");
+                } else if (conditionThree == conditionTwo) {
+                    System.out.println("Вызывается ближайший лифт");
                     result = finishFlor;
                     System.out.println("Мы прибыли на " + result +  " этаж");
-                    elevator2 = currentFlor;
-                    currentFlor = finishFlor;
+                    elevator2 = finishFlor;
                     finishFlor = currPostElev2;
-                    } else {
-                        System.out.println("Вызывается третий лифт");
-                        result = finishFlor;
-                        System.out.println("Мы прибыли на " + result +  " этаж");
-                        elevator3 = currentFlor;
-                        currentFlor = finishFlor;
-                        finishFlor = currPostElev3;
+                    currPostElev2 = elevator2;
+                } else if (conditionThree < conditionTwo && conditionThree < currentFlor ){
+                    System.out.println("Вызывается третий лифт");
+                    result = finishFlor;
+                    System.out.println("Мы прибыли на " + result +  " этаж");
+                    elevator3 = finishFlor;
+                    finishFlor = currPostElev3;
+                    currPostElev3 = elevator3;
+                } else if (conditionTwo < conditionThree && conditionTwo < currentFlor) {
+                    System.out.println("Вызывается втотрой лифт");
+                    result = finishFlor;
+                    System.out.println("Мы прибыли на " + result +  " этаж");
+                    currentFlor = finishFlor;
+                    finishFlor = elevator2;
+                    elevator2 = currPostElev2;
+                } else if (currentFlor == currPostElev2) {
+                    System.out.println("Вызывается втотрой лифт");
+                    result = finishFlor;
+                    System.out.println("Мы прибыли на " + result +  " этаж");
+                    currentFlor = finishFlor;
+                    finishFlor = elevator2;
+                    elevator2 = currPostElev2;
+                } else if (currentFlor == currPostElev3) {
+                    System.out.println("Вызывается третий лифт");
+                    result = finishFlor;
+                    System.out.println("Мы прибыли на " + result +  " этаж");
+                    currentFlor = finishFlor;
+                    finishFlor = elevator2;
+                    elevator2 = currPostElev2;
                 }
             }
             button = sc.next();
