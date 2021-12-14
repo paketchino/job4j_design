@@ -37,7 +37,7 @@ public class CVSReader {
     }
 
     private void writeInFile(List<String> file) {
-        try(PrintWriter pw = new PrintWriter(new FileWriter(file.toString()))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(file.toString()))) {
             file.forEach(pw::println);
         } catch (IOException e) {
             e.printStackTrace();

@@ -44,7 +44,7 @@ public class Elevator {
                     elevator2 = finishFlor;
                     finishFlor = currPostElev2;
                     currPostElev2 = elevator2;
-                } else if (conditionThree < conditionTwo && conditionThree < currentFlor ){
+                } else if (conditionThree < conditionTwo && conditionThree < currentFlor) {
                     System.out.println("Вызывается третий лифт");
                     result = finishFlor;
                     System.out.println("Мы прибыли на " + result +  " этаж");

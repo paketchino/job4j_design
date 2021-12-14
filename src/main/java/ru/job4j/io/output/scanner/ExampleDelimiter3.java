@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.CharArrayReader;
 import java.util.Scanner;
 
-public class exampleDelimiter3 {
+public class ExampleDelimiter3 {
         public static void main(String[] args) {
             String ls  = System.lineSeparator();
             var data = String.join(ls,

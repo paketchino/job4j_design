@@ -21,12 +21,8 @@ public class Conacat {
         this.phone = phone;
     }
 
-    public Conacat() {}
-
     @Override
     public String toString() {
-        return "Conacat{" +
-                "phone='" + phone + '\''
-                + '}';
+        return "Conacat{" + "phone='" + phone + '\'' + '}';
     }
 }

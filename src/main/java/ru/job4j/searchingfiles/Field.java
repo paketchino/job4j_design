@@ -1,4 +1,4 @@
-package ru.job4j.searchingFiles;
+package ru.job4j.searchingfiles;
 
 import java.io.*;
 import java.nio.file.Files;

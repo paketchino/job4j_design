@@ -37,8 +37,6 @@ public class University {
         this.subjects = subjects;
     }
 
-    University() {}
-
     @Override
     public String toString() {
         return "University{" + "deducted="

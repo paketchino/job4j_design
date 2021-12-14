@@ -9,9 +9,9 @@ import java.util.StringJoiner;
 
 public class TableEditor implements AutoCloseable {
 
-    private final String URL_KEY = "con.url";
-    private final String URL_LOGIN = "con.login";
-    private final String URL_PASSWORD = "con.password";
+    private static final String URL_KEY = "con.url";
+    private static final String URL_LOGIN = "con.login";
+    private static final String URL_PASSWORD = "con.password";
 
     private Connection connection;
 
@@ -46,7 +46,7 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void createTable (String tableName) {
+    public void createTable(String tableName) {
         String sql = String.format("create table if not exists %s()", tableName);
         setConnection(sql);
     }

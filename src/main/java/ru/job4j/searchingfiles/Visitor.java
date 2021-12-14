@@ -1,5 +1,5 @@
-package ru.job4j.searchingFiles;
-//
+package ru.job4j.searchingfiles;
+
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;

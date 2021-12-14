@@ -11,7 +11,7 @@ public class SortedArray {
             resultArr[i] = (int) (Math.random() * 100);
         }
         System.out.println(Arrays.toString(resultArr));
-        for(int i = 0; i < resultArr.length - 1; i++) {
+        for (int i = 0; i < resultArr.length - 1; i++) {
             for (int j = 0; j < resultArr.length - i - 1; j++) {
                 if (resultArr[j] > resultArr[j + 1]) {
                     int b = resultArr[j];

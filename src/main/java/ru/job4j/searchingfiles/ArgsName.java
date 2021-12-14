@@ -1,5 +1,5 @@
-package ru.job4j.searchingFiles;
-//
+package ru.job4j.searchingfiles;
+
 import java.util.*;
 
 public class ArgsName {
@@ -22,7 +22,7 @@ public class ArgsName {
         }
     }
 
-    public static ArgsName of (String[] args) {
+    public static ArgsName of(String[] args) {
         ArgsName argsName = new ArgsName();
         argsName.parse(args);
         return argsName;

@@ -31,8 +31,6 @@ public class Person {
     @XmlElement(name = "status")
     private String[] statuses;
 
-    public Person() {}
-
     public Person(boolean sex, int age, Conacat conacat, String[] statuses) {
         this.sex = sex;
         this.age = age;

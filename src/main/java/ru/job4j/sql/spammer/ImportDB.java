@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.BinaryOperator;
+import java.sql.Statement;
 
 public class ImportDB {
 

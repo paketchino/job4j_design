@@ -3,7 +3,7 @@ package ru.job4j.sql;
 import java.sql.*;
 import java.util.StringJoiner;
 
-public class Statement_Demo {
+public class StatementDemo {
 
     private static Connection getConnection() throws Exception {
         Class.forName("org.postgresql.Driver");

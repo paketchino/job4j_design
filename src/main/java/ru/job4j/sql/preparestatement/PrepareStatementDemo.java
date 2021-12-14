@@ -1,4 +1,4 @@
-package ru.job4j.sql.prepareStatement;
+package ru.job4j.sql.preparestatement;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ public class PrepareStatementDemo {
 
     private Connection connection;
 
-    public PrepareStatementDemo() throws Exception{
+    public PrepareStatementDemo() throws Exception {
         initConnection();
     }
 
@@ -20,7 +20,7 @@ public class PrepareStatementDemo {
         connection = DriverManager.getConnection(url, login, password);
     }
 
-    private void insert1 (City city) {
+    private void insert1(City city) {
         try (PreparedStatement statement  =
                      connection.prepareStatement("insert into cities(name, population) values (?, ?)")) {
             statement.setString(1, city.getName());
@@ -74,7 +74,7 @@ public class PrepareStatementDemo {
         return cities;
     }
 
-    public City insert (City city) {
+    public City insert(City city) {
         try (PreparedStatement statement =
                      connection.prepareStatement("insert into cities(name, population) values (?, ?)",
                              Statement.RETURN_GENERATED_KEYS)) {
@@ -95,9 +95,9 @@ public class PrepareStatementDemo {
 
     public static void main(String[] args) throws Exception {
         PrepareStatementDemo demo = new PrepareStatementDemo();
-        City city1 = new City(1, "Moscow",10000);
+        City city1 = new City(1, "Moscow", 10000);
         demo.insert(city1);
-        City city2 = new City(2, "Penza",256);
+        City city2 = new City(2, "Penza", 256);
         demo.insert(city2);
         List<City> findAll = demo.findAll();
         for (City c : findAll) {
