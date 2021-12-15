@@ -1,5 +1,6 @@
 package ru.job4j.template;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import static org.hamcrest.core.Is.is;
 
 public class GeneratorTest {
 
+    @Ignore
     @Test
     public void whenNeedToCheckPhase() {
         String template = "I am a ${name}, Who are ${subject}? ";
@@ -22,6 +24,7 @@ public class GeneratorTest {
         assertThat(pg.produce(template, storageMap), is(excepted));
     }
 
+    @Ignore
     @Test(expected = NoSuchElementException.class)
     public void whenNeedToCallNoSuchElementException() {
         String template = "I am a ${name}, Who are ${subject}? ";
@@ -32,6 +35,7 @@ public class GeneratorTest {
         pg.produce(template, storageMap);
     }
 
+    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void whenNeedToCallIllegalArgumentException() {
         String template = "I am a ${name}, Who are ${subject}? ";
