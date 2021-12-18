@@ -47,6 +47,7 @@ public class University {
                 + Arrays.toString(subjects) + '}';
     }
 
+
     public static void main(String[] args) throws Exception {
         final University university = new University(false, 5, "Pert",
                 new Student(20, "Roman"), new String[] {"JSOM", "JAVA"});
@@ -64,21 +65,21 @@ public class University {
             University result = (University) unmarshaller.unmarshal(reader);
             System.out.println(result);
         }
-//        final Gson gson = new GsonBuilder().create();
-//        System.out.println(gson.toJson(university));
-//        final String univesityJson =
-//                "{"
-//                        + "\"deducted\" : false,"
-//                        + "\"score\" :5,"
-//                        + "\"teacher\":\"Petr\","
-//                        + "\"student\":"
-//                            + "{"
-//                                + "\"age\":20"
-//                            + "},"
-//                        + "\"subjects\":"
-//                            + "[\"JSOM\",\"JAVA\"]"
-//                + "}";
-//        final University universityMod = gson.fromJson(univesityJson, University.class);
-//        System.out.println(universityMod);
+        final Gson gson = new GsonBuilder().create();
+        System.out.println(gson.toJson(university));
+        final String univesityJson =
+                "{"
+                        + "\"deducted\" : false,"
+                        + "\"score\" :5,"
+                        + "\"teacher\":\"Petr\","
+                        + "\"student\":"
+                            + "{"
+                                + "\"age\":20"
+                            + "},"
+                        + "\"subjects\":"
+                            + "[\"JSOM\",\"JAVA\"]"
+                + "}";
+        final University universityMod = gson.fromJson(univesityJson, University.class);
+        System.out.println(universityMod);
     }
 }

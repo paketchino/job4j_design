@@ -63,9 +63,6 @@ public class ReduceMethodThenOneArguments {
 
     static class FlatIt {
 
-//        public static List<Integer> flatten (Iterator<Iterator<Integer>> it) {
-//            return iteratorToStream(it).flatMap((iter1 -> iter1).collect(Collectors.toList());
-//        }
 
         public static <T> Stream<T> iteratorToStream(Iterator<T> it) {
             return StreamSupport.stream(Spliterators.spliteratorUnknownSize(it, Spliterator.ORDERED), false);

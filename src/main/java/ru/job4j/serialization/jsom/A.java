@@ -5,11 +5,9 @@ import org.json.JSONPropertyIgnore;
 public class A {
     private B b;
 
-
     public String getHello() {
         return "Hello";
     }
-
 
     public B getB() {
         return b;

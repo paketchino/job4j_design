@@ -83,55 +83,56 @@ public class Person {
                 + '}';
     }
 
-    public static void main(String[] args) throws Exception {
-//        final Person person = new Person(false, 30, new Conacat("11-111"), new String[] {"Student", "Free"});
-//        JAXBContext context = JAXBContext.newInstance(Person.class);
-//        Marshaller marshaller = context.createMarshaller();
-//        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-//        String xml = "";
-//        try (StringWriter writer = new StringWriter()) {
-//            marshaller.marshal(person, writer);
-//            xml = writer.getBuffer().toString();
-//            System.out.println(xml);
-//        }
-
-//        Unmarshaller unmarshaller = context.createUnmarshaller();
-//        try (StringReader reader = new StringReader(xml)) {
-//            Person result = (Person) unmarshaller.unmarshal(reader);
-//            System.out.println(result);
-//        }
-//        final Gson gson = new GsonBuilder().create();
-//        System.out.println(gson.toJson(person));
-//
-//        final String personJson =
-//                "{"
-//                + "\"sex\":false,"
-//                + "\"age\":30,"
-//                + "\"conacat\":"
-//                    + "{"
-//                        + "\"phone\":\"+7(924)111-111-11-11\""
-//                + "\"statuses\":"
-//                        + "[\"Student\",\"Free\"]"
-//                + "}";
-//        final Person personMod = gson.fromJson(personJson, Person.class);
-//        System.out.println(personMod);
-
-        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
-
-        List<String> list = new ArrayList<>();
-        list.add("Student");
-        list.add("Free");
-        JSONArray jsonStatuses = new JSONArray(list);
-
+    /**
+     * для примера
+       JSONArray jsonStatuses = new JSONArray(list);
         final Person person = new Person(false, 30, new Conacat("11-111"), new String[] {"Worker", "Married"});
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sex", person.isSex());
         jsonObject.put("age", person.getAge());
         jsonObject.put("phone", jsonContact);
         jsonObject.put("statuses", jsonStatuses);
-
         System.out.println(jsonObject.toString());
+      System.out.println(new JSONObject(person).toString());
+     */
 
-        System.out.println(new JSONObject(person).toString());
+    public static void main(String[] args) throws Exception {
+        final Person person = new Person(false, 30, new Conacat("11-111"), new String[] {"Student", "Free"});
+        JAXBContext context = JAXBContext.newInstance(Person.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        String xml = "";
+        try (StringWriter writer = new StringWriter()) {
+            marshaller.marshal(person, writer);
+            xml = writer.getBuffer().toString();
+            System.out.println(xml);
+        }
+
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        try (StringReader reader = new StringReader(xml)) {
+            Person result = (Person) unmarshaller.unmarshal(reader);
+            System.out.println(result);
+        }
+        final Gson gson = new GsonBuilder().create();
+        System.out.println(gson.toJson(person));
+
+        final String personJson =
+                "{"
+                + "\"sex\":false,"
+                + "\"age\":30,"
+                + "\"conacat\":"
+                    + "{"
+                        + "\"phone\":\"+7(924)111-111-11-11\""
+                + "\"statuses\":"
+                        + "[\"Student\",\"Free\"]"
+                + "}";
+        final Person personMod = gson.fromJson(personJson, Person.class);
+        System.out.println(personMod);
+
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
+        List<String> list = new ArrayList<>();
+        list.add("Student");
+        list.add("Free");
+        JSONArray jsonStatuses = new JSONArray(list);
     }
 }

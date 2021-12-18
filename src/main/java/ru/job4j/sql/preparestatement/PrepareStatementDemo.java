@@ -107,8 +107,5 @@ public class PrepareStatementDemo {
         System.out.println(demo.update(city1));
         demo.delete(city1);
         System.out.println(demo.update(city1));
- //       for (City c: findAll2) {
- //           System.out.println(c.getName() + " " + c.getPopulation());
-  //      }
     }
 }

@@ -44,7 +44,6 @@ class BoxDemo extends Box {
         System.out.println(100 * Math.random());
         System.out.println(example.length() == example1.length());
         System.out.println(example.equals(example1));
-        //System.out.println(box1.equals(box2));
     }
 }
 
