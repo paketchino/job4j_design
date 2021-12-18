@@ -3,6 +3,7 @@ package ru.job4j.kiss;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.List;
 
 
 public class MaxMin {
