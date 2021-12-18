@@ -1,4 +1,4 @@
-package ru.job4j.ru.job4j.kiss;
+package ru.job4j.kiss;
 
 import org.junit.Test;
 
@@ -31,13 +31,14 @@ public class MaxMinTest {
         Comparator<Integer> comparator = new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1);
+                return o1.compareTo(o2);
             }
         };
         List<Integer> list = new ArrayList<>();
-        list.add(1);
+        list.add(5);
         list.add(2);
         list.add(3);
+        list.add(1);
         list.add(4);
 
         MaxMin maxMin = new MaxMin();
