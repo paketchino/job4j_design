@@ -1,5 +1,5 @@
 package ru.job4j.io.output.scanner;
-//
+
 import ru.job4j.io.output.ArgsName;
 
 import java.io.*;
