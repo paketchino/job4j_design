@@ -1,5 +1,5 @@
 package ru.job4j.collection;
-//
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
