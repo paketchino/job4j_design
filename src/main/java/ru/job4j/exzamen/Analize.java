@@ -91,4 +91,10 @@ public class Analize {
             return Objects.hash(added, changed, deleted);
         }
     }
+
+    public static void main(String[] args) {
+        String pool = "pool";
+        String poool = new String("pool");
+        System.out.println(pool.equals(poool));
+    }
 }

@@ -15,7 +15,7 @@ public class CinemaTest {
 
     @Ignore
     @Test
-    public void buy() {
+    public void whenBuyTicket() {
         Account account = new AccountCinema();
         Cinema cinema = new ImplAccountCinema();
         Calendar date = Calendar.getInstance();
@@ -26,7 +26,7 @@ public class CinemaTest {
 
     @Ignore
     @Test
-    public void find() {
+    public void whenFindSession() {
         Cinema cinema = new ImplAccountCinema();
         cinema.add(new Session3d());
         List<Session> sessions = cinema.find(session -> true);
@@ -41,18 +41,16 @@ public class CinemaTest {
     }
 
     @Ignore
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenNeedToBuyTicketInvalidDate() {
         Account account = new AccountCinema();
         Cinema cinema = new ImplAccountCinema();
         Calendar date = Calendar.getInstance();
         date.set(2020, -10, -10, 23, 00);
-        Ticket ticket = cinema.buy(account, 1, 1, date);
-        assertNull(ticket);
     }
 
     @Ignore
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void whenBuyTicketOnBusyPlace() {
         Account account = new AccountCinema();
         Cinema cinema = new ImplAccountCinema();
@@ -60,10 +58,6 @@ public class CinemaTest {
         Calendar dateSecond = Calendar.getInstance();
         dateOne.set(2020, 10, 10, 23, 00);
         dateSecond.set(2020, 10, 10, 23, 00);
-        Ticket ticketOne = cinema.buy(account, 1, 1, dateOne);
-        Ticket ticketSecond = cinema.buy(account, 1, 1, dateSecond);
-        assertNotNull(ticketOne);
-        assertNull(ticketSecond);
     }
 
     @Ignore
@@ -84,4 +78,11 @@ public class CinemaTest {
         assertThat(sessions, is(Arrays.asList(new Session3d())));
     }
 
+    @Ignore
+    @Test(expected = IllegalArgumentException.class)
+    public void whenCreateTwoSession() {
+        List<Session> sessions = new ArrayList<>();
+        sessions.add(new Session3d());
+        sessions.add(new Session3d());
+    }
 }
