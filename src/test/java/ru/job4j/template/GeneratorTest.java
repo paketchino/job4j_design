@@ -25,7 +25,7 @@ public class GeneratorTest {
 
     @Ignore
     @Test(expected = NoSuchElementException.class)
-    public void WhenNeedToCheckKeyThatMissing() {
+    public void whenNeedToCheckKeyThatMissing() {
         String template = "I am a ${name}, Who are ${subject}? ";
         Map<String, String> storageMap = new HashMap<>();
         storageMap.put("project", "Amazon");
