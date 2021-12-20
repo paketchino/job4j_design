@@ -25,7 +25,7 @@ public class GeneratorTest {
 
     @Ignore
     @Test(expected = NoSuchElementException.class)
-    public void whenNeedToCallNoSuchElementException() {
+    public void WhenNeedToCheckKeyThatMissing() {
         String template = "I am a ${name}, Who are ${subject}? ";
         Map<String, String> storageMap = new HashMap<>();
         storageMap.put("project", "Amazon");
@@ -36,7 +36,7 @@ public class GeneratorTest {
 
     @Ignore
     @Test(expected = IllegalArgumentException.class)
-    public void whenNeedToCallIllegalArgumentException() {
+        public void whenContainsRedundantKeys() {
         String template = "I am a ${name}, Who are ${subject}? ";
         Map<String, String> storageMap = new HashMap<>();
         storageMap.put("project", "Amazon");
