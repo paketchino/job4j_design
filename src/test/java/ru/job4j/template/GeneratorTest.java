@@ -43,5 +43,7 @@ public class GeneratorTest {
         storageMap.put("input", "Computer");
         storageMap.put("name", "Evgen");
         storageMap.put("subject", "you");
+        PhaseGeneration pg = new PhaseGeneration();
+        pg.produce(template, storageMap);
     }
 }
