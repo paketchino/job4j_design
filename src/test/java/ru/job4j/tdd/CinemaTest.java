@@ -47,7 +47,7 @@ public class CinemaTest {
         Cinema cinema = new ImplAccountCinema();
         Calendar date = Calendar.getInstance();
         date.set(2020, -10, -10, 23, 00);
-        Ticket ticketOne = cinema.buy(account, 1, 1,date);
+        Ticket ticketOne = cinema.buy(account, 1, 1, date);
     }
 
     @Ignore
