@@ -13,6 +13,10 @@ public class MemStore implements Store {
         employees.add(em);
     }
 
+    public Employee get(int index) {
+       return employees.get(index);
+    }
+
     @Override
     public List<Employee> findBy(Predicate<Employee> filter) {
         return employees.stream().filter(filter).collect(Collectors.toList());
