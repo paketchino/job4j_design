@@ -98,6 +98,6 @@ public class ReportEngineTest {
                 .append(System.lineSeparator())
                 .append("</html>")
                 .append(System.lineSeparator());
-        assertThat(itDep.generate(em -> true), is(except));
+        assertThat(itDep.generate(em -> true), is(except.toString()));
     }
 }
