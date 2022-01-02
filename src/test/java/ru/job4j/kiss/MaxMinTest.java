@@ -22,7 +22,7 @@ public class MaxMinTest {
         list.add(1);
         list.add(2);
         list.add(3);
-        MaxMin maxMin = new MaxMin();
+        MaxMin maxMin = new MaxMin(list, comparator);
         assertThat(maxMin.max(list, comparator), is(3));
     }
 
@@ -40,8 +40,7 @@ public class MaxMinTest {
         list.add(3);
         list.add(1);
         list.add(4);
-
-        MaxMin maxMin = new MaxMin();
+        MaxMin maxMin = new MaxMin(list, comparator);
         assertThat(maxMin.min(list, comparator), is(1));
     }
 }
