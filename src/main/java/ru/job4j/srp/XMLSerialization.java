@@ -29,12 +29,13 @@ public class XMLSerialization implements Report {
     }
 
     private String toXML(List<Employee> employees) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(Employee.class);
+        JAXBContext context = JAXBContext.newInstance(Employees.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(new Employees(employees), writer);
+            marshaller.marshal(
+                    new Employees(employees), writer);
             xml = writer.getBuffer().toString();
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,7 +43,7 @@ public class XMLSerialization implements Report {
         return xml;
     }
 
-    @XmlRootElement(name = "employees")
+    @XmlRootElement(name = "employeeList")
     public static class Employees {
 
         private List<Employee> employeeList;

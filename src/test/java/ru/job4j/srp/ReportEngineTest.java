@@ -4,18 +4,18 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.stream.Stream;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.greaterThan;
 
 public class ReportEngineTest {
 
-    @Ignore
     @Test
     public void whenOldGenerated() throws JAXBException {
         MemStore store = new MemStore();
@@ -103,35 +103,35 @@ public class ReportEngineTest {
 
     @Ignore
     @Test
-    public void whenNeedToInputSerializableToXML() {
+    public void whenNeedToInputSerializableToXML() throws DatatypeConfigurationException {
         MemStore storage = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee workerFirst = new Employee("Ivan", now, now, 100);
         storage.add(workerFirst);
         XMLSerialization xml = new XMLSerialization(storage);
+        XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) now);
         StringBuilder except = new StringBuilder()
-                .append("<?xml version=\"1.1\" encoding=\"UTF-8\" ?>")
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
                 .append(System.lineSeparator())
-                .append("<employees>")
+                .append("<employeeList>")
                 .append(System.lineSeparator())
-                .append("   <employees")
+                .append("   <employeeList")
                 .append(System.lineSeparator())
-                .append("<name>Ivan</name>")
+                .append("       <fired>").append(date).append("</fired>")
                 .append(System.lineSeparator())
-                .append("<hired>").append(workerFirst.getHired()).append("</hired>")
+                .append("       <hired>").append(date).append("</hired>")
                 .append(System.lineSeparator())
-                .append("<fired>").append(workerFirst.getFired()).append("</fired>")
+                .append("       <name>").append(workerFirst.getName()).append("</name>")
                 .append(System.lineSeparator())
-                .append("<salary>").append(workerFirst.getSalary()).append("</salary>")
+                .append("       <salary>").append(workerFirst.getSalary()).append("</salary>")
                 .append(System.lineSeparator())
-                .append("   </employees>")
+                .append("   </employeeList>")
                 .append(System.lineSeparator())
-                .append("</employees>")
+                .append("</employeeList>")
                 .append(System.lineSeparator());
         assertThat(xml.generate(em -> true), is(except.toString()));
     }
 
-    @Ignore
     @Test
     public void whenNeedToInputToJSONSerialization() throws JAXBException {
         MemStore storage = new MemStore();
@@ -139,7 +139,37 @@ public class ReportEngineTest {
         Employee workerFirst = new Employee("Ivan", now, now, 100);
         storage.add(workerFirst);
         JSONSerialization json = new JSONSerialization(storage);
-        StringBuilder except = new StringBuilder();
+        StringBuilder except = new StringBuilder()
+                .append("{\"employees\":[{\"name\":\"")
+                .append(workerFirst.getName())
+                .append("\",\"")
+                .append("hired\":{\"year\":")
+                .append(now.get(Calendar.YEAR))
+                .append(",\"month\":")
+                .append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":")
+                .append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":")
+                .append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":")
+                .append(now.get(Calendar.MINUTE))
+                .append(",\"second\":")
+                .append(now.get(Calendar.SECOND))
+                .append("},\"fired\":")
+                .append("{\"year\":")
+                .append(now.get(Calendar.YEAR))
+                .append(",\"month\":")
+                .append(now.get(Calendar.MONTH))
+                .append(",\"dayOfMonth\":")
+                .append(now.get(Calendar.DAY_OF_MONTH))
+                .append(",\"hourOfDay\":")
+                .append(now.get(Calendar.HOUR_OF_DAY))
+                .append(",\"minute\":")
+                .append(now.get(Calendar.MINUTE))
+                .append(",\"second\":")
+                .append(now.get(Calendar.SECOND))
+                .append("},\"salary\":")
+                .append(workerFirst.getSalary()).append("}]}");
         assertThat(json.generate(em -> true), is(except.toString()));
     }
 }
