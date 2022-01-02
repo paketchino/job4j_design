@@ -6,7 +6,6 @@ import java.util.function.IntUnaryOperator;
 
 enum BillingStrategy {
 
-
         NORMAL (a -> a),
 
         HAPPY_HOUR (a -> a / 2);
