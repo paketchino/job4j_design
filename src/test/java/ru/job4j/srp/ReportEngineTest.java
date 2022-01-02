@@ -3,6 +3,7 @@ package ru.job4j.srp;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import javax.xml.bind.JAXBException;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class ReportEngineTest {
 
     @Ignore
     @Test
-    public void whenOldGenerated() {
+    public void whenOldGenerated() throws JAXBException {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
@@ -34,7 +35,7 @@ public class ReportEngineTest {
     }
 
     @Test
-    public void whenNeedToSortedDecreaseSalaryAndDeleteDateAndFired() {
+    public void whenNeedToSortedDecreaseSalaryAndDeleteDateAndFired() throws JAXBException {
         MemStore storage = new MemStore();
         Employee workerFirst = new Employee("Ivan", 100);
         Employee workerSecond = new Employee("Sergey", 220);
@@ -63,7 +64,6 @@ public class ReportEngineTest {
         assertThat(report.generate(em-> true), is(excepted.toString()));
     }
 
-    @Ignore
     @Test
     public void whenNeedToInputDateInHTML() {
         MemStore storage = new MemStore();
@@ -99,5 +99,47 @@ public class ReportEngineTest {
                 .append("</html>")
                 .append(System.lineSeparator());
         assertThat(itDep.generate(em -> true), is(except.toString()));
+    }
+
+    @Ignore
+    @Test
+    public void whenNeedToInputSerializableToXML() {
+        MemStore storage = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee workerFirst = new Employee("Ivan", now, now, 100);
+        storage.add(workerFirst);
+        XMLSerialization xml = new XMLSerialization(storage);
+        StringBuilder except = new StringBuilder()
+                .append("<?xml version=\"1.1\" encoding=\"UTF-8\" ?>")
+                .append(System.lineSeparator())
+                .append("<employees>")
+                .append(System.lineSeparator())
+                .append("   <employees")
+                .append(System.lineSeparator())
+                .append("<name>Ivan</name>")
+                .append(System.lineSeparator())
+                .append("<hired>").append(workerFirst.getHired()).append("</hired>")
+                .append(System.lineSeparator())
+                .append("<fired>").append(workerFirst.getFired()).append("</fired>")
+                .append(System.lineSeparator())
+                .append("<salary>").append(workerFirst.getSalary()).append("</salary>")
+                .append(System.lineSeparator())
+                .append("   </employees>")
+                .append(System.lineSeparator())
+                .append("</employees>")
+                .append(System.lineSeparator());
+        assertThat(xml.generate(em -> true), is(except.toString()));
+    }
+
+    @Ignore
+    @Test
+    public void whenNeedToInputToJSONSerialization() throws JAXBException {
+        MemStore storage = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee workerFirst = new Employee("Ivan", now, now, 100);
+        storage.add(workerFirst);
+        JSONSerialization json = new JSONSerialization(storage);
+        StringBuilder except = new StringBuilder();
+        assertThat(json.generate(em -> true), is(except.toString()));
     }
 }
