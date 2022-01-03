@@ -2,13 +2,14 @@ package ru.job4j.ocp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class WrongOPC3 {
 
     /*
-    Данный метод возвращаете null, что
+    Данный метод возвращаете List, что
     является не правильным т.к метод ничего не возвращает
      */
 
@@ -27,10 +28,11 @@ public class WrongOPC3 {
     }
 
     /*
-    Метод принимает два параметра никак их не использует
-    и ничего не возвращет
+    Метод возвращает ArrayList, чтобы не нарушить
+    OCP должны возвращать интерфейс List<Integer>
      */
-    public void getSum(int a, int b) {
+    public ArrayList<Integer> getSum(int a, int b) {
         System.out.println("Something doing");
+        return null;
     }
 }
