@@ -111,24 +111,15 @@ public class ReportEngineTest {
         XMLSerialization xml = new XMLSerialization(storage);
         XMLGregorianCalendar date = DatatypeFactory.newInstance().newXMLGregorianCalendar((GregorianCalendar) now);
         StringBuilder except = new StringBuilder()
-                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
-                .append(System.lineSeparator())
-                .append("<employeeList>")
-                .append(System.lineSeparator())
-                .append("   <employeeList")
-                .append(System.lineSeparator())
-                .append("       <fired>").append(date).append("</fired>")
-                .append(System.lineSeparator())
-                .append("       <hired>").append(date).append("</hired>")
-                .append(System.lineSeparator())
-                .append("       <name>").append(workerFirst.getName()).append("</name>")
-                .append(System.lineSeparator())
-                .append("       <salary>").append(workerFirst.getSalary()).append("</salary>")
-                .append(System.lineSeparator())
-                .append("   </employeeList>")
-                .append(System.lineSeparator())
-                .append("</employeeList>")
-                .append(System.lineSeparator());
+                .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
+                .append("<employeeList>\n")
+                .append("    <employeeList>\n")
+                .append("        <fired>").append(date).append("</fired>\n")
+                .append("        <hired>").append(date).append("</hired>\n")
+                .append("        <name>").append(workerFirst.getName()).append("</name>\n")
+                .append("        <salary>").append(workerFirst.getSalary()).append("</salary>\n")
+                .append("    </employeeList>\n")
+                .append("</employeeList>\n");
         assertThat(xml.generate(em -> true), is(except.toString()));
     }
 
