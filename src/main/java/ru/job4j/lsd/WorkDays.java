@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/*
+Рассмотрим пример. Бухгалтерия считает по табелю сколько работник отработал
+и если он отработал норму, то высчитывает для него зарплату. Далее мы наследуемся допустим для бухгалтерии магазина. В нем мы забываем про условие когда добавляем специфическое поведение
+и когда запускаем пример, то получаем, что недобросовестный работник получает зарплату.
+ */
+
 public class WorkDays implements Iterable<Integer> {
 
     private Map<LocalDate, Integer> workDays = new LinkedHashMap<>();
@@ -43,6 +49,10 @@ class CountingRoom  {
     }
 }
 
+
+/*
+    Далее мы наследуемся допустим для бухгалтерии магазина. В нем мы забываем про условие когда добавляем специфическое поведение.
+ */
 class ShopCountingRoom extends CountingRoom {
 
     public ShopCountingRoom(int normHours, int payPerHour) {
@@ -58,6 +68,10 @@ class ShopCountingRoom extends CountingRoom {
         return factHours * payPerHour;
     }
 }
+
+/*
+    Когда запускаем пример, то получаем, что недобросовестный работник получает зарплату.
+ */
 
     class SecondRule {
     public static void main(String[] args) {

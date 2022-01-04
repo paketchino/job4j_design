@@ -101,7 +101,6 @@ public class ReportEngineTest {
         assertThat(itDep.generate(em -> true), is(except.toString()));
     }
 
-    @Ignore
     @Test
     public void whenNeedToInputSerializableToXML() throws DatatypeConfigurationException {
         MemStore storage = new MemStore();

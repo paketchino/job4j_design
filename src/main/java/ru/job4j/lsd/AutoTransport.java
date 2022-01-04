@@ -1,5 +1,9 @@
 package ru.job4j.lsd;
 
+
+/*
+    У нас есть класс автотранспорта.
+ */
 public class AutoTransport {
 
     protected float fuel;
@@ -18,6 +22,10 @@ public class AutoTransport {
     }
 }
 
+
+/*
+    Пусть теперь есть наследник - автобус. Предположим ему нужно больше топлива, чтобы сдвинуться с места
+ */
 class Bus extends AutoTransport {
 
     public Bus(float fuel) {
@@ -34,7 +42,11 @@ class Bus extends AutoTransport {
     }
 
 }
-
+/*
+    От AutoTransport мы ожидаем, что машина сдвинется, но нет.
+    Автобус не сдвигается, т.к. в нем усилено предусловие.
+    Ожидаем мы одно поведение, а получаем другое.
+ */
     class FirstRule {
     public static void main(String[] args) {
         AutoTransport bus = new Bus(3);

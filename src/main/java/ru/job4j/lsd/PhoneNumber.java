@@ -1,5 +1,9 @@
 package ru.job4j.lsd;
 
+/*
+    Есть номер телефона и абонент. От него наследуется абонент какого-то оператора.
+ */
+
 public class PhoneNumber {
 
     private int countryCode;
@@ -26,6 +30,7 @@ public class PhoneNumber {
         return number;
     }
 }
+
 
 class Subscriber {
 
@@ -58,6 +63,11 @@ class Subscriber {
     }
 }
 
+/*
+    При переопределении сеттера, забыли сделать проверку. Поэтому код в машине запускается успешно.
+    Поэтому код в машине запускается успешно.
+ */
+
 class SomeOperatorSubscriber extends Subscriber {
 
     public SomeOperatorSubscriber(PhoneNumber phoneNumber) {
@@ -70,6 +80,10 @@ class SomeOperatorSubscriber extends Subscriber {
     }
 }
 
+
+/*
+    Ошибка остается. Нарушено состояние объекта потомка, потому что в нем не соблюдено условие предка.
+ */
     class ThirdRule {
     public static void main(String[] args) {
         Subscriber subscriber = new SomeOperatorSubscriber(
