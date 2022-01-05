@@ -1,4 +1,4 @@
-package ru.job4j.lsd.parkingсars;
+package ru.job4j.lsd.parking;
 
 public interface CheckingPlace {
 
