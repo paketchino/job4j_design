@@ -6,6 +6,8 @@ import ru.job4j.lsd.product.Apple;
 import ru.job4j.lsd.product.Food;
 import ru.job4j.lsd.product.Milk;
 import ru.job4j.lsd.product.Oil;
+import ru.job4j.lsd.storage.Shop;
+import ru.job4j.lsd.storage.Storage;
 import ru.job4j.lsd.storage.Trash;
 
 import java.time.LocalDate;
@@ -35,13 +37,13 @@ public class SortFoodTest {
     @Ignore
     @Test
     public void whenNeedToMoveFoodInTrash() {
-        LocalDate expiryDateOil = LocalDate.of(2021, 11, 30);
-        LocalDate createDateOil = LocalDate.of(2021, 9, 29);
-        Food oil = new Oil("Oil", expiryDateOil, createDateOil, 100, 5);
-        List<Food> trashStorage = new ArrayList<>();
-        Trash trash = new Trash(trashStorage);
-        SortFood sortFood = new SortFood(trash);
-        sortFood.sortFood(oil);
-        assertTrue(sortFood.sortFood(oil));
+        List<Storage> storages = new ArrayList<>();
+        Trash trash = new Trash();
+        Shop shop = new Shop();
+        Food apple = new Apple("Apple", LocalDate.of(2022, 12, 31),
+                LocalDate.of(2022, 1, 1), 100, 30);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(apple);
+        assertTrue(trash.addFood(apple));
     }
 }

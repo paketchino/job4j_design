@@ -2,19 +2,39 @@ package ru.job4j.lsd.storage;
 
 import ru.job4j.lsd.product.Food;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Warehouse implements AddProductInTheStorage {
+public class Warehouse implements Storage, Accept {
 
-    private final List<Food> warehouseStorage;
+    List<Food> warehouseList = new ArrayList<>();
+    private LocalDate today = LocalDate.now();
 
-    public Warehouse(List<Food> warehouseStorage) {
-        this.warehouseStorage = warehouseStorage;
+    @Override
+    public boolean addFood(Food food) {
+        boolean rsl = false;
+        if (accept(food)) {
+            warehouseList.add(food);
+            rsl = true;
+        }
+        return rsl;
     }
 
     @Override
-    public void addFood(Food food) {
-        warehouseStorage.add(food);
+    public boolean accept(Food food) {
+        boolean rsl = false;
+        if (expiryDateCalculation(food) >= 75) {
+            rsl = true;
+        }
+        return rsl;
+    }
+
+    @Override
+    public int expiryDateCalculation(Food food) {
+        int countExpiryDate = Period.between(food.getExpiryDate(), today).getDays();
+        int countCreateDate = Period.between(food.getCreateDate(), today).getDays();
+        return (int) ((countExpiryDate / countCreateDate * 1.0) / 100.0);
     }
 }
