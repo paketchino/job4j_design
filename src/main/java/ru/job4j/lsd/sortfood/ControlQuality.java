@@ -19,11 +19,13 @@ public class ControlQuality {
         this.storage = storage;
     }
 
+    /*
+     Метод который сортирует еду
+     */
+
     public void sortFood(Food food) {
         for (Storage storage : storage) {
-            if (storage.accept(food)) {
-                storage.addFood(food);
-            }
+            storage.addFood(food);
         }
     }
 }

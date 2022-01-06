@@ -1,26 +1,34 @@
 package example;
 
+import org.joda.time.DateMidnight;
+import org.joda.time.Days;
+import java.time.temporal.ChronoUnit;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 
-
 public class LocalDatePeriod {
 
-    static int calculatePeriod(LocalDate startDate,
-                                           LocalDate endDate) {
-        int rsl = 0;
-        Period expiryDate = Period.between(startDate, endDate);
-        Period createDate = Period.between(startDate, endDate);
-        rsl = (int) (expiryDate.getMonths() / createDate.getMonths() * 1.0) / 100;
+    private static LocalDate localDate = LocalDate.now();
+
+    static double calculatePeriod(LocalDate createDateAndLocalDateNow,
+                               LocalDate createDateAndExpiryDate) {
+        double createDateAndLocalDateNowCount = ChronoUnit.DAYS.between(createDateAndLocalDateNow, localDate);
+        double createDateAndExpiryDateCount = ChronoUnit.DAYS.between(createDateAndLocalDateNow, createDateAndExpiryDate);
+        double rsl = ((createDateAndLocalDateNowCount / createDateAndExpiryDateCount) * 100) - 100;
         System.out.println("Period between start and end "
-                + "date is : " + rsl);
+                + "date is : " + createDateAndLocalDateNowCount);
+        System.out.println("Period between start and end "
+                + "date is : " + createDateAndExpiryDateCount);
+        System.out.println("Goods expired by"
+                + " : " + rsl);
         return rsl;
     }
 
     public static void main(String[] args) {
-        LocalDate startDate = LocalDate.parse("2017-02-13");
-        LocalDate endDate = LocalDate.parse("2018-08-20");
+        LocalDate expiryDateCount = LocalDate.parse("2015-12-01");
+        LocalDate createDateCount = LocalDate.parse("2021-12-31");
 
-        calculatePeriod(startDate, endDate);
+        calculatePeriod(expiryDateCount, createDateCount);
     }
 }

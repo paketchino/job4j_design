@@ -7,31 +7,35 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trash implements Storage, Accept {
+public class Trash implements Storage {
 
     private List<Food> trashList = new ArrayList<>();
 
-    private LocalDate today = LocalDate.now();
+    /*
+    Метод который проверяет был ли
+    добавлен обьект
+    return true || false
+     */
 
     @Override
     public boolean addFood(Food food) {
         boolean rsl = false;
-       if (accept(food)) {
+        if (accept(food)) {
            trashList.add(food);
            rsl = true;
        }
        return rsl;
     }
 
-    @Override
-    public boolean accept(Food food) {
-        return expiryDateCalculation(food) < 25;
-    }
+    /*
+      Метод который провереряет прошел ли срок
+      хранения у продуктов
+      return true || false
+     */
 
     @Override
-    public int expiryDateCalculation(Food food) {
-        int countExpiryDate = Period.between(food.getExpiryDate(), today).getDays();
-        int countCreateDate = Period.between(food.getCreateDate(), today).getDays();
-        return (int) ((countExpiryDate / countCreateDate * 1.0) / 100.0);
+    public boolean accept(Food food) {
+        return expiryDateCalculation(food) < 25.0;
     }
+
 }

@@ -9,14 +9,14 @@ import ru.job4j.lsd.product.Oil;
 import ru.job4j.lsd.storage.Shop;
 import ru.job4j.lsd.storage.Storage;
 import ru.job4j.lsd.storage.Trash;
+import ru.job4j.lsd.storage.Warehouse;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SortFoodTest {
 
@@ -34,16 +34,62 @@ public class SortFoodTest {
         assertThat(milk.getPrice(), is(117.0));
     }
 
-    @Ignore
     @Test
-    public void whenNeedToMoveFoodInTrash() {
+    public void whenNeedToMoveFoodInShopAndPutUpOfDiscount() {
         List<Storage> storages = new ArrayList<>();
-        Trash trash = new Trash();
         Shop shop = new Shop();
         Food apple = new Apple("Apple", LocalDate.of(2022, 12, 31),
                 LocalDate.of(2022, 1, 1), 100, 30);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(apple);
-        assertTrue(trash.addFood(apple));
+        assertTrue(shop.addFood(apple));
+        assertThat(apple.getPrice(), is(70.0));
+    }
+
+    @Test
+    public void whenNeedToMoveFoodInShopWithoutPutOfDiscount() {
+        List<Storage> storages = new ArrayList<>();
+        Shop shop = new Shop();
+        Food apple = new Apple("Apple", LocalDate.of(2022, 1, 31),
+                LocalDate.of(2022, 1, 1), 100, 30);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(apple);
+        assertTrue(shop.addFood(apple));
+    }
+
+    @Test
+    public void whenNeedToMoveFoodInTrash() {
+        List<Storage> storages = new ArrayList<>();
+        Trash trash = new Trash();
+        LocalDate expiryDate = LocalDate.parse("2021-11-30");
+        LocalDate createDate = LocalDate.parse("2021-01-01");
+        Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(milk);
+        assertTrue(trash.addFood(milk));
+    }
+
+    @Test
+    public void whenNeedToMoveFoodInWarehouse() {
+        List<Storage> storages = new ArrayList<>();
+        Warehouse warehouse = new Warehouse();
+        LocalDate expiryDate = LocalDate.parse("2022-01-31");
+        LocalDate createDate = LocalDate.parse("2021-12-01");
+        Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(milk);
+        assertTrue(warehouse.addFood(milk));
+    }
+
+    @Test
+    public void whenMoveFreshFoodInTrash() {
+        List<Storage> storages = new ArrayList<>();
+        Trash trash = new Trash();
+        LocalDate expiryDate = LocalDate.parse("2022-01-31");
+        LocalDate createDate = LocalDate.parse("2021-12-01");
+        Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(milk);
+        assertFalse(trash.addFood(milk));
     }
 }

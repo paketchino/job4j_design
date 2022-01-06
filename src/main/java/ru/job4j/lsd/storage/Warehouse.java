@@ -7,10 +7,15 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Warehouse implements Storage, Accept {
+public class Warehouse implements Storage {
 
-    List<Food> warehouseList = new ArrayList<>();
-    private LocalDate today = LocalDate.now();
+    private List<Food> warehouseList = new ArrayList<>();
+
+    /*
+     Метод который проверяет был ли
+     добавлен обьект в warehouseList.
+     return true || false
+     */
 
     @Override
     public boolean addFood(Food food) {
@@ -22,19 +27,19 @@ public class Warehouse implements Storage, Accept {
         return rsl;
     }
 
+    /*
+      Метод который провереряет прошел ли срок
+      хранения у продуктов expiryDateCalculation(food) >= 25.0
+      && expiryDateCalculation(food) <= 100.0
+      return true || false
+     */
+
     @Override
     public boolean accept(Food food) {
         boolean rsl = false;
-        if (expiryDateCalculation(food) >= 75) {
+        if (expiryDateCalculation(food) >= 25.0 && expiryDateCalculation(food) <= 100.0) {
             rsl = true;
         }
         return rsl;
-    }
-
-    @Override
-    public int expiryDateCalculation(Food food) {
-        int countExpiryDate = Period.between(food.getExpiryDate(), today).getDays();
-        int countCreateDate = Period.between(food.getCreateDate(), today).getDays();
-        return (int) ((countExpiryDate / countCreateDate * 1.0) / 100.0);
     }
 }
