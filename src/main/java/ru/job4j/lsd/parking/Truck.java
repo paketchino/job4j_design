@@ -1,12 +1,12 @@
 package ru.job4j.lsd.parking;
 
-public class PassengerCar implements Transport {
+public class Truck implements Transport {
 
     private String name;
 
     private int size;
 
-    public PassengerCar(String name, int size) {
+    public Truck(String name, int size) {
         this.name = name;
         this.size = size;
     }
@@ -21,8 +21,8 @@ public class PassengerCar implements Transport {
 
     @Override
     public String toString() {
-        return "PassengerCar{" + "name='" + name + '\''
-                + ", size=" + size + '}';
+        return "Truck{" + "name=" + name
+                + ", age=" + size + '}';
     }
 
     @Override
