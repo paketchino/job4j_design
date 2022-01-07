@@ -35,7 +35,7 @@ public class Trash implements Storage {
 
     @Override
     public boolean accept(Food food) {
-        return expiryDateCalculation(food) < 25.0;
+        return expiryDateCalculation(food) >= 100;
     }
 
 }
