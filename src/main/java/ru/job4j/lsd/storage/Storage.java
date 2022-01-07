@@ -12,17 +12,19 @@ public interface Storage {
 
     /*
     Метод проверяет срок годности продукта
-    если макс. срок хренения не соотвествует
-    LocalDate.now(), то return 0
+    если макс. срок хранения не соотвествует текущему
+    году, то return 100
      */
 
     default double expiryDateCalculation(Food food) {
+        double rsl = 0;
         LocalDate localDateNow = LocalDate.now();
         if (food.getExpiryDate().getYear() < localDateNow.getYear()) {
-            return 0;
+            return 100;
         }
         double countCreateDate = ChronoUnit.DAYS.between(food.getCreateDate(), localDateNow);
         double countExpireDate = ChronoUnit.DAYS.between(food.getCreateDate(), food.getExpiryDate());
-        return ((countExpireDate / countCreateDate) * 100.0) - 100.0;
+        rsl = (countCreateDate / countExpireDate) * 100.0;
+        return rsl;
     };
 }

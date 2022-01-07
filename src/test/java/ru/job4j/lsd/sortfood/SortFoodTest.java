@@ -5,12 +5,10 @@ import org.junit.Test;
 import ru.job4j.lsd.product.Apple;
 import ru.job4j.lsd.product.Food;
 import ru.job4j.lsd.product.Milk;
-import ru.job4j.lsd.product.Oil;
 import ru.job4j.lsd.storage.Shop;
 import ru.job4j.lsd.storage.Storage;
 import ru.job4j.lsd.storage.Trash;
 import ru.job4j.lsd.storage.Warehouse;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +33,21 @@ public class SortFoodTest {
     }
 
     @Test
-    public void whenNeedToMoveFoodInShopAndPutUpOfDiscount() {
+    public void whenFreshFoodTo25ThenNeedMoveInWarehouse() {
+        List<Storage> storages = new ArrayList<>();
+        Warehouse warehouse = new Warehouse();
+        Food apple = new Apple("Apple", LocalDate.of(2022, 12, 31),
+                LocalDate.of(2022, 1, 1), 100, 30);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(apple);
+        assertTrue(warehouse.addFood(apple));
+    }
+
+    @Test
+    public void whenNotFreshFoodThenPutOfDiscount() {
         List<Storage> storages = new ArrayList<>();
         Shop shop = new Shop();
-        Food apple = new Apple("Apple", LocalDate.of(2022, 12, 31),
+        Food apple = new Apple("Apple", LocalDate.of(2022, 1, 10),
                 LocalDate.of(2022, 1, 1), 100, 30);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(apple);
@@ -47,18 +56,7 @@ public class SortFoodTest {
     }
 
     @Test
-    public void whenNeedToMoveFoodInShopWithoutPutOfDiscount() {
-        List<Storage> storages = new ArrayList<>();
-        Shop shop = new Shop();
-        Food apple = new Apple("Apple", LocalDate.of(2022, 1, 31),
-                LocalDate.of(2022, 1, 1), 100, 30);
-        ControlQuality controlQuality = new ControlQuality(storages);
-        controlQuality.sortFood(apple);
-        assertTrue(shop.addFood(apple));
-    }
-
-    @Test
-    public void whenNeedToMoveFoodInTrash() {
+    public void whenNotFreshFoodInLastYearThenMoveInTrash() {
         List<Storage> storages = new ArrayList<>();
         Trash trash = new Trash();
         LocalDate expiryDate = LocalDate.parse("2021-11-30");
@@ -70,11 +68,23 @@ public class SortFoodTest {
     }
 
     @Test
-    public void whenNeedToMoveFoodInWarehouse() {
+    public void whenNotFreshFoodThenMoveInTrash() {
+        List<Storage> storages = new ArrayList<>();
+        Trash trash = new Trash();
+        LocalDate expiryDate = LocalDate.parse("2022-01-06");
+        LocalDate createDate = LocalDate.parse("2022-01-01");
+        Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(milk);
+        assertTrue(trash.addFood(milk));
+    }
+
+    @Test
+    public void whenFreshFoodThenMoveInWarehouse() {
         List<Storage> storages = new ArrayList<>();
         Warehouse warehouse = new Warehouse();
-        LocalDate expiryDate = LocalDate.parse("2022-01-31");
-        LocalDate createDate = LocalDate.parse("2021-12-01");
+        LocalDate expiryDate = LocalDate.parse("2022-12-31");
+        LocalDate createDate = LocalDate.parse("2022-01-01");
         Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(milk);

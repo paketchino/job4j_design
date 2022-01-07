@@ -41,7 +41,7 @@ public class Shop implements Storage {
         if (expiryDateCalculation(food) > 75.0) {
             food.setPriceAfterDiscount();
             rsl = true;
-        } else if (expiryDateCalculation(food) > 25.0 && expiryDateCalculation(food) < 75.0) {
+        } else if (expiryDateCalculation(food) > 25.0 && expiryDateCalculation(food) <= 75.0) {
             rsl = true;
         }
         return rsl;

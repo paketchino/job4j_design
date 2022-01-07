@@ -28,16 +28,15 @@ public class Warehouse implements Storage {
     }
 
     /*
-      Метод который провереряет прошел ли срок
-      хранения у продуктов expiryDateCalculation(food) >= 25.0
-      && expiryDateCalculation(food) <= 100.0
+      Метод который проверяет прошел ли срок
+      хранения у продуктов expiryDateCalculation(food) < 25.0
       return true || false
      */
 
     @Override
     public boolean accept(Food food) {
         boolean rsl = false;
-        if (expiryDateCalculation(food) >= 25.0 && expiryDateCalculation(food) <= 100.0) {
+        if (expiryDateCalculation(food) < 25) {
             rsl = true;
         }
         return rsl;

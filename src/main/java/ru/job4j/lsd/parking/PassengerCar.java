@@ -8,7 +8,7 @@ public class PassengerCar implements Transport {
 
     public PassengerCar(String name, int size) {
         this.name = name;
-        this.size = size;
+        this.size = 1;
     }
 
     public int getSize() {
