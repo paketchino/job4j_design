@@ -36,70 +36,101 @@ public class SortFoodTest {
     public void whenFreshFoodTo25ThenNeedMoveInWarehouse() {
         List<Storage> storages = new ArrayList<>();
         Warehouse warehouse = new Warehouse();
+        storages.add(warehouse);
         Food apple = new Apple("Apple", LocalDate.of(2022, 12, 31),
                 LocalDate.of(2022, 1, 1), 100, 30);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(apple);
-        assertTrue(warehouse.addFood(apple));
+        assertThat(warehouse.getSize(), is(1));
     }
 
     @Test
     public void whenNotFreshFoodThenPutOfDiscount() {
         List<Storage> storages = new ArrayList<>();
         Shop shop = new Shop();
+        storages.add(shop);
         Food apple = new Apple("Apple", LocalDate.of(2022, 1, 10),
                 LocalDate.of(2022, 1, 1), 100, 30);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(apple);
-        assertTrue(shop.addFood(apple));
         assertThat(apple.getPrice(), is(70.0));
+        assertThat(shop.getSize(), is(1));
     }
 
     @Test
     public void whenNotFreshFoodInLastYearThenMoveInTrash() {
         List<Storage> storages = new ArrayList<>();
         Trash trash = new Trash();
+        storages.add(trash);
         LocalDate expiryDate = LocalDate.parse("2021-11-30");
         LocalDate createDate = LocalDate.parse("2021-01-01");
         Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(milk);
-        assertTrue(trash.addFood(milk));
+        assertThat(trash.getSize(), is(1));
     }
 
     @Test
     public void whenNotFreshFoodThenMoveInTrash() {
         List<Storage> storages = new ArrayList<>();
         Trash trash = new Trash();
+        storages.add(trash);
         LocalDate expiryDate = LocalDate.parse("2022-01-06");
         LocalDate createDate = LocalDate.parse("2022-01-01");
         Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(milk);
-        assertTrue(trash.addFood(milk));
+        assertThat(trash.getSize(), is(1));
     }
 
     @Test
     public void whenFreshFoodThenMoveInWarehouse() {
         List<Storage> storages = new ArrayList<>();
         Warehouse warehouse = new Warehouse();
+        storages.add(warehouse);
         LocalDate expiryDate = LocalDate.parse("2022-12-31");
         LocalDate createDate = LocalDate.parse("2022-01-01");
         Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(milk);
-        assertTrue(warehouse.addFood(milk));
+        assertThat(warehouse.getSize(), is(1));
     }
 
     @Test
     public void whenMoveFreshFoodInTrash() {
         List<Storage> storages = new ArrayList<>();
         Trash trash = new Trash();
+        storages.add(trash);
         LocalDate expiryDate = LocalDate.parse("2022-01-31");
         LocalDate createDate = LocalDate.parse("2021-12-01");
         Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
         ControlQuality controlQuality = new ControlQuality(storages);
         controlQuality.sortFood(milk);
-        assertFalse(trash.addFood(milk));
+        assertThat(trash.getSize(), is(0));
+    }
+
+    @Test
+    public void whenNotFreshFoodInShop() {
+        List<Storage> storages = new ArrayList<>();
+        Shop shop = new Shop();
+        storages.add(shop);
+        LocalDate expiryDate = LocalDate.parse("2022-01-06");
+        LocalDate createDate = LocalDate.parse("2022-01-01");
+        Food milk = new Milk("Milk", expiryDate, createDate, 80, 20);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(milk);
+        assertThat(shop.getSize(), is(0));
+    }
+
+    @Test
+    public void whenMoveFoodPutOfDiscountInWarehouse() {
+        List<Storage> storages = new ArrayList<>();
+        Warehouse warehouse = new Warehouse();
+        storages.add(warehouse);
+        Food apple = new Apple("Apple", LocalDate.of(2022, 1, 10),
+                LocalDate.of(2022, 1, 1), 100, 30);
+        ControlQuality controlQuality = new ControlQuality(storages);
+        controlQuality.sortFood(apple);
+        assertThat(warehouse.getSize(), is(0));
     }
 }

@@ -27,4 +27,6 @@ public interface Storage {
         rsl = (countCreateDate / countExpireDate) * 100.0;
         return rsl;
     };
+
+    int getSize();
 }

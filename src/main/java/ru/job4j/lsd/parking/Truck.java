@@ -8,7 +8,7 @@ public class Truck implements Transport {
 
     public Truck(String name, int size) {
         this.name = name;
-        this.size = size;
+        this.size = 2;
     }
 
     public int getSize() {

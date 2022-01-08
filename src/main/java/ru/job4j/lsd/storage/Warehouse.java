@@ -41,4 +41,14 @@ public class Warehouse implements Storage {
         }
         return rsl;
     }
+
+    /*
+   Возвращают размер листа для проверки
+   что продукт был добавлен
+    */
+
+    @Override
+    public int getSize() {
+        return warehouseList.size();
+    }
 }
