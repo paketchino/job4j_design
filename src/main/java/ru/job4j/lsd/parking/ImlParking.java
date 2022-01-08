@@ -5,18 +5,18 @@ import java.util.List;
 
 public class ImlParking implements Parking {
 
-    private List<Transport> parkList = new ArrayList<>();
+    private List<Transport> parkingPlace;
+    private int passengerCar;
+    private int truck;
+
+    public ImlParking(int passengerCar, int truck, List<Transport> parkingPlace) {
+        this.passengerCar = passengerCar;
+        this.truck = truck;
+        this.parkingPlace = parkingPlace;
+    }
 
     @Override
     public boolean add(Transport transport) {
-        boolean rsl = false;
-        if (transport.getSizeCar() == 1) {
-            parkList.add(transport);
-            rsl = true;
-        } else if (transport.getSizeCar() > 1) {
-            parkList.add(transport);
-            rsl = true;
-        }
-        return rsl;
+        return false;
     }
 }
