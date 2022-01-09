@@ -17,6 +17,27 @@ public class ImlParking implements Parking {
 
     @Override
     public boolean add(Transport transport) {
-        return false;
+        boolean rsl = false;
+        if (getSize(transport)) {
+            parkingPlace.add(transport);
+            rsl = true;
+        }
+        return rsl;
+    }
+
+    @Override
+    public boolean getSize(Transport transport) {
+        boolean rsl = false;
+        if (passengerCar == 0 && truck == 0) {
+            System.out.println("Парковка заполнена");
+            rsl = false;
+        } else if (transport.getSizeCar() == 1 || transport.getSizeCar() == 2) {
+            passengerCar = passengerCar - transport.getSizeCar();
+            rsl = true;
+        } else if (transport.getSizeCar() == 2) {
+            truck = truck - transport.getSizeCar();
+            rsl = true;
+        }
+        return rsl;
     }
 }

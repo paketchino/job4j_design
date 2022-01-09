@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 
 public class ImlParkingTest {
 
-    @Ignore
     @Test
     public void when2PassengerCar1TruckThenParkingHave3FreePlaceForTAndPC() {
         List<Transport> listTr = new ArrayList<>();
@@ -17,36 +16,41 @@ public class ImlParkingTest {
         Transport passengerCarFirst = new PassengerCar("Lada", 1);
         Transport passengerCarSecond = new PassengerCar("BMW", 1);
         Transport truck = new Truck("Truck", 2);
-        imlParking.add(passengerCarFirst);
-        imlParking.add(passengerCarSecond);
-        imlParking.add(truck);
+        assertTrue(imlParking.add(passengerCarFirst));
+        assertTrue(imlParking.add(passengerCarSecond));
+        assertTrue(imlParking.add(truck));
     }
 
-    @Ignore
     @Test
     public void when1TruckThenHave2ParkingPlaceForPassengerCars() {
         List<Transport> listTr = new ArrayList<>();
         ImlParking imlParking = new ImlParking(2, 0, listTr);
         Transport truck = new Truck("Truck", 2);
-        imlParking.add(truck);
+        assertTrue(imlParking.add(truck));
     }
 
-    @Ignore
     @Test
     public void when4PassengerCarThenHave2PlaceForTrucks() {
         List<Transport> listTr = new ArrayList<>();
-        ImlParking imlParking = new ImlParking(0, 4, listTr);
+        ImlParking imlParking = new ImlParking(4, 4, listTr);
         Transport transportFirst = new PassengerCar("Name1", 1);
         Transport transportSecond = new PassengerCar("Name2", 1);
         Transport transportThird = new PassengerCar("Name3", 1);
         Transport transportForth = new PassengerCar("Name4", 1);
-        imlParking.add(transportFirst);
-        imlParking.add(transportSecond);
-        imlParking.add(transportThird);
-        imlParking.add(transportForth);
+        Transport truck = new Truck("Truck1", 2);
+        Transport truck1 = new Truck("Truck2", 2);
+        Transport truck2 = new Truck("Truck3", 2);
+        Transport truck3 = new Truck("Truck4", 2);
+        assertTrue(imlParking.add(truck));
+        assertTrue(imlParking.add(truck1));
+        assertTrue(imlParking.add(truck2));
+        assertTrue(imlParking.add(truck3));
+        assertTrue(imlParking.add(transportFirst));
+        assertTrue(imlParking.add(transportSecond));
+        assertTrue(imlParking.add(transportThird));
+        assertTrue(imlParking.add(transportForth));
     }
 
-    @Ignore
     @Test
     public void when3TruckThenHave4PlaceForPassengerCar() {
         List<Transport> listTr = new ArrayList<>();
@@ -54,12 +58,11 @@ public class ImlParkingTest {
         Transport transportFirst = new Truck("Truck1", 2);
         Transport transportSecond = new Truck("Truck2", 2);
         Transport transportThird = new Truck("Truck3", 2);
-        imlParking.add(transportFirst);
-        imlParking.add(transportSecond);
-        imlParking.add(transportThird);
+        assertTrue(imlParking.add(transportFirst));
+        assertTrue(imlParking.add(transportSecond));
+        assertFalse(imlParking.add(transportThird));
     }
 
-    @Ignore
     @Test
     public void when1Truck1PassengerCarThenHave1PlaceForPC() {
         List<Transport> listTr = new ArrayList<>();
