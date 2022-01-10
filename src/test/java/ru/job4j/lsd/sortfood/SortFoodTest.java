@@ -44,6 +44,7 @@ public class SortFoodTest {
         assertThat(warehouse.getSize(), is(1));
     }
 
+    @Ignore
     @Test
     public void whenNotFreshFoodThenPutOfDiscount() {
         List<Storage> storages = new ArrayList<>();
