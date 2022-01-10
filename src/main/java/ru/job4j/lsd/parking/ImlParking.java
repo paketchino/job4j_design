@@ -5,21 +5,20 @@ import java.util.List;
 
 public class ImlParking implements Parking {
 
-    private List<Transport> parkingPlace;
-    private int passengerCar;
-    private int truck;
+    private int passengerCarPlace;
+    private int truckPlace;
+    private List<Transport> parkingPlace =
+            new ArrayList<>(passengerCarPlace + truckPlace);
 
-    public ImlParking(int passengerCar, int truck, List<Transport> parkingPlace) {
-        this.passengerCar = passengerCar;
-        this.truck = truck;
-        this.parkingPlace = parkingPlace;
+    public ImlParking(int passengerCarPlace, int truckPlace) {
+        this.passengerCarPlace = passengerCarPlace;
+        this.truckPlace = truckPlace;
     }
 
     @Override
     public boolean add(Transport transport) {
         boolean rsl = false;
         if (getSize(transport)) {
-            parkingPlace.add(transport);
             rsl = true;
         }
         return rsl;
@@ -28,14 +27,20 @@ public class ImlParking implements Parking {
     @Override
     public boolean getSize(Transport transport) {
         boolean rsl = false;
-        if (passengerCar == 0 && truck == 0) {
-            System.out.println("Парковка заполнена");
-            rsl = false;
-        } else if (transport.getSizeCar() == 1 || transport.getSizeCar() == 2) {
-            passengerCar = passengerCar - transport.getSizeCar();
+        if (passengerCarPlace == 0 && truckPlace == 0
+                || transport.getSizeCar() == 1 && passengerCarPlace == 0 && truckPlace != 0) {
+            return false;
+        } else if (transport.getSizeCar() == 1) {
+            passengerCarPlace = passengerCarPlace - transport.getSizeCar();
+            parkingPlace.add(transport);
             rsl = true;
-        } else if (transport.getSizeCar() == 2) {
-            truck = truck - transport.getSizeCar();
+        } else if (transport.getSizeCar() > 1) {
+            if (truckPlace == 0) {
+                passengerCarPlace = passengerCarPlace - transport.getSizeCar();
+                parkingPlace.add(transport);
+            } else {
+                truckPlace = truckPlace - transport.getSizeCar() + 1;
+            }
             rsl = true;
         }
         return rsl;
