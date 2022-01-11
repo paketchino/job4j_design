@@ -6,5 +6,5 @@ public interface Parking {
 
     boolean add(Transport transport);
 
-    boolean getSize(Transport transport);
+    boolean validate(Transport transport);
 }

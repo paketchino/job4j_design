@@ -81,4 +81,22 @@ public class ImlParkingTest {
         assertFalse(imlParking.add(passengerCarFirst));
         assertFalse(imlParking.add(passengerCarSecond));
     }
+
+    @Test
+    public void when1TruckThenHave1PlaceForPC() {
+        ImlParking imlParking = new ImlParking(1, 0);
+        Transport transportFirst = new Truck("Truck1", 2);
+        Transport passengerCarSecond = new PassengerCar("BMW", 1);
+        assertFalse(imlParking.add(transportFirst));
+        assertTrue(imlParking.add(passengerCarSecond));
+    }
+
+    @Test
+    public void when2CarTakesThenHave1PlaceForTruck() {
+        ImlParking imlParking = new ImlParking(0, 1);
+        Transport passengerCarSecond = new PassengerCar("BMW", 1);
+        Transport passengerCarThird = new PassengerCar("Priora", 1);
+        assertFalse(imlParking.add(passengerCarSecond));
+        assertFalse(imlParking.add(passengerCarThird));
+    }
 }
