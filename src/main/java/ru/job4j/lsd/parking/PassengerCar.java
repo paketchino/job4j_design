@@ -6,7 +6,7 @@ public class PassengerCar implements Transport {
 
     private int size;
 
-    public PassengerCar(String name, int size) {
+    public PassengerCar(String name) {
         this.name = name;
         this.size = 1;
     }

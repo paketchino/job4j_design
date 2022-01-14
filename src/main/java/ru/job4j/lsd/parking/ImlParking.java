@@ -7,12 +7,12 @@ public class ImlParking implements Parking {
 
     private int passengerCarPlace;
     private int truckPlace;
-    private List<Transport> parkingPlace =
-            new ArrayList<>(passengerCarPlace + truckPlace);
+    private List<Transport> parkingPlace;
 
     public ImlParking(int passengerCarPlace, int truckPlace) {
         this.passengerCarPlace = passengerCarPlace;
         this.truckPlace = truckPlace;
+        this.parkingPlace = new ArrayList<>(passengerCarPlace + truckPlace);
     }
 
     /*
