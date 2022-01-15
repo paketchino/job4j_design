@@ -15,7 +15,7 @@ public class ImlParkingTest {
         ImlParking imlParking = new ImlParking(2, 1);
         Transport passengerCarFirst = new PassengerCar("Lada");
         Transport passengerCarSecond = new PassengerCar("BMW");
-        Transport truck = new Truck("Truck", 2);
+        Transport truck = new Truck("Truck", 4);
         assertTrue(imlParking.add(passengerCarFirst));
         assertTrue(imlParking.add(passengerCarSecond));
         assertTrue(imlParking.add(truck));
@@ -38,9 +38,9 @@ public class ImlParkingTest {
         Transport transportThird = new PassengerCar("Name3");
         Transport transportForth = new PassengerCar("Name4");
         Transport truck = new Truck("Truck1", 2);
-        Transport truck1 = new Truck("Truck2", 2);
-        Transport truck2 = new Truck("Truck3", 2);
-        Transport truck3 = new Truck("Truck4", 2);
+        Transport truck1 = new Truck("Truck2", 4);
+        Transport truck2 = new Truck("Truck3", 3);
+        Transport truck3 = new Truck("Truck4", 5);
         assertTrue(imlParking.add(truck));
         assertTrue(imlParking.add(truck1));
         assertTrue(imlParking.add(truck2));

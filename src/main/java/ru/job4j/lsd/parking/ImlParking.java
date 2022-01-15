@@ -18,7 +18,6 @@ public class ImlParking implements Parking {
         this.parkingPlaceForPC = new ArrayList<>(passengerCarPlace);
         this.parkingPlaceForTruck = new ArrayList<>(truckPlace);
     }
-
     /*
         Метод add добавляет машины в свободные места
         на парковке
@@ -45,7 +44,6 @@ public class ImlParking implements Parking {
         }
         return rsl;
     }
-
     /*
         Метод проверяет все невалидные варианты
      */

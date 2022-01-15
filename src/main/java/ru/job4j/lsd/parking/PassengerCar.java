@@ -3,12 +3,12 @@ package ru.job4j.lsd.parking;
 public class PassengerCar implements Transport {
 
     private String name;
-
-    private int size;
+    private int size = 1;
+    private static final int SIZEPC = 1;
 
     public PassengerCar(String name) {
         this.name = name;
-        this.size = 1;
+        this.size = SIZEPC;
     }
 
     public int getSize() {
