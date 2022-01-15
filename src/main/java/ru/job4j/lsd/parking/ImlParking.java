@@ -7,12 +7,16 @@ public class ImlParking implements Parking {
 
     private int passengerCarPlace;
     private int truckPlace;
-    private List<Transport> parkingPlace;
+    private List<Transport> parkingPlaceForTruck;
+    private List<Transport> parkingPlaceForPC;
+    public static final int SIZE = 1;
+    public static final int NOTPLACE = 0;
 
     public ImlParking(int passengerCarPlace, int truckPlace) {
         this.passengerCarPlace = passengerCarPlace;
         this.truckPlace = truckPlace;
-        this.parkingPlace = new ArrayList<>(passengerCarPlace + truckPlace);
+        this.parkingPlaceForPC = new ArrayList<>(passengerCarPlace);
+        this.parkingPlaceForTruck = new ArrayList<>(truckPlace);
     }
 
     /*
@@ -24,17 +28,18 @@ public class ImlParking implements Parking {
     public boolean add(Transport transport) {
         boolean rsl = false;
         if (validate(transport)) {
-            if (transport.getSizeCar() == 1) {
-                passengerCarPlace = passengerCarPlace - transport.getSizeCar();
-                parkingPlace.add(transport);
+            if (transport.getSizeCar() == SIZE) {
+                passengerCarPlace -= transport.getSizeCar();
+                parkingPlaceForPC.add(transport);
                 rsl = true;
-            } else if (transport.getSizeCar() > 1) {
-                if (truckPlace == 0) {
-                    passengerCarPlace = passengerCarPlace - transport.getSizeCar();
+            } else if (transport.getSizeCar() > SIZE) {
+                if (truckPlace == NOTPLACE) {
+                    passengerCarPlace -= transport.getSizeCar();
+                    parkingPlaceForPC.add(transport);
                 } else {
-                    truckPlace = truckPlace - transport.getSizeCar() + 1;
+                    truckPlace -= (transport.getSizeCar() + 1);
+                    parkingPlaceForTruck.add(transport);
                 }
-                parkingPlace.add(transport);
                 rsl = true;
             }
         }
@@ -46,8 +51,8 @@ public class ImlParking implements Parking {
      */
     @Override
     public boolean validate(Transport transport) {
-        return (passengerCarPlace != 0 || truckPlace != 0)
-                && (transport.getSizeCar() != 1 || passengerCarPlace != 0 || truckPlace == 0)
-                && (passengerCarPlace >= transport.getSizeCar() || truckPlace != 0);
+        return (passengerCarPlace != NOTPLACE || truckPlace != NOTPLACE)
+                && (transport.getSizeCar() != SIZE || passengerCarPlace != NOTPLACE || truckPlace == NOTPLACE)
+                && (passengerCarPlace >= transport.getSizeCar() || truckPlace != NOTPLACE);
     }
 }
