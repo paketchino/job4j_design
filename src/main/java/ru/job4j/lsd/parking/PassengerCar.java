@@ -3,15 +3,17 @@ package ru.job4j.lsd.parking;
 public class PassengerCar implements Transport {
 
     private String name;
-    private int size = 1;
-    private static final int SIZEPC = 1;
+    private int size;
 
-    public PassengerCar(String name) {
+    public PassengerCar(String name, int size) {
         this.name = name;
-        this.size = SIZEPC;
+        this.size = size;
     }
 
     public int getSize() {
+        if (size > 1) {
+            throw new IllegalArgumentException();
+        }
         return size;
     }
 

@@ -12,6 +12,9 @@ public class Truck implements Transport {
     }
 
     public int getSize() {
+        if (size == 1) {
+            throw new IllegalArgumentException();
+        }
         return size;
     }
 
