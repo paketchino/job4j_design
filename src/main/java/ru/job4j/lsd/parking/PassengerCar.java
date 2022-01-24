@@ -5,16 +5,9 @@ public class PassengerCar implements Transport {
     private String name;
     private int size;
 
-    public PassengerCar(String name, int size) {
+    public PassengerCar(String name) {
         this.name = name;
-        this.size = size;
-    }
-
-    public int getSize() {
-        if (size > 1) {
-            throw new IllegalArgumentException();
-        }
-        return size;
+        this.size = 1;
     }
 
     public void setSize(int size) {
@@ -29,6 +22,6 @@ public class PassengerCar implements Transport {
 
     @Override
     public int getSizeCar() {
-        return getSize();
+        return size;
     }
 }

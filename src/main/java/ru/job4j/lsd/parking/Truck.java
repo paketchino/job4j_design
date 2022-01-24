@@ -11,13 +11,6 @@ public class Truck implements Transport {
         this.size = size;
     }
 
-    public int getSize() {
-        if (size == 1) {
-            throw new IllegalArgumentException();
-        }
-        return size;
-    }
-
     public void setSize(int size) {
         this.size = size;
     }
@@ -30,6 +23,9 @@ public class Truck implements Transport {
 
     @Override
     public int getSizeCar() {
-        return getSize();
+        if (size == 1) {
+            throw new IllegalArgumentException();
+        }
+        return size;
     }
 }

@@ -13,8 +13,8 @@ public class ImlParkingTest {
     public void when2PassengerCar1TruckThenParkingHave3FreePlaceForTAndPC() {
         List<Transport> listTr = new ArrayList<>();
         ImlParking imlParking = new ImlParking(2, 1);
-        Transport passengerCarFirst = new PassengerCar("Lada", 1);
-        Transport passengerCarSecond = new PassengerCar("BMW", 1);
+        Transport passengerCarFirst = new PassengerCar("Lada");
+        Transport passengerCarSecond = new PassengerCar("BMW");
         Transport truck = new Truck("Truck", 4);
         assertTrue(imlParking.add(passengerCarFirst));
         assertTrue(imlParking.add(passengerCarSecond));
@@ -33,10 +33,10 @@ public class ImlParkingTest {
     public void when4PassengerCarThenHave2PlaceForTrucks() {
         List<Transport> listTr = new ArrayList<>();
         ImlParking imlParking = new ImlParking(4, 4);
-        Transport transportFirst = new PassengerCar("Name1", 1);
-        Transport transportSecond = new PassengerCar("Name2", 1);
-        Transport transportThird = new PassengerCar("Name3", 1);
-        Transport transportForth = new PassengerCar("Name4", 1);
+        Transport transportFirst = new PassengerCar("Name1");
+        Transport transportSecond = new PassengerCar("Name2");
+        Transport transportThird = new PassengerCar("Name3");
+        Transport transportForth = new PassengerCar("Name4");
         Transport truck = new Truck("Truck1", 2);
         Transport truck1 = new Truck("Truck2", 4);
         Transport truck2 = new Truck("Truck3", 3);
@@ -67,7 +67,7 @@ public class ImlParkingTest {
     public void when1Truck1PassengerCarThenHave1PlaceForPC() {
         List<Transport> listTr = new ArrayList<>();
         ImlParking imlParking = new ImlParking(1, 0);
-        Transport transportFirst = new PassengerCar("Name1", 1);
+        Transport transportFirst = new PassengerCar("Name1");
         Transport transportSecond = new Truck("Truck1", 2);
         assertTrue(imlParking.add(transportFirst));
         assertFalse(imlParking.add(transportSecond));
@@ -75,8 +75,8 @@ public class ImlParkingTest {
 
     @Test
     public void when2PassengerTruckThenHave1PlaceForTruck() {
-        Transport passengerCarFirst = new PassengerCar("Lada", 1);
-        Transport passengerCarSecond = new PassengerCar("BMW", 1);
+        Transport passengerCarFirst = new PassengerCar("Lada");
+        Transport passengerCarSecond = new PassengerCar("BMW");
         ImlParking imlParking = new ImlParking(0, 2);
         assertFalse(imlParking.add(passengerCarFirst));
         assertFalse(imlParking.add(passengerCarSecond));
@@ -86,7 +86,7 @@ public class ImlParkingTest {
     public void when1TruckThenHave1PlaceForPC() {
         ImlParking imlParking = new ImlParking(1, 0);
         Transport transportFirst = new Truck("Truck1", 2);
-        Transport passengerCarSecond = new PassengerCar("BMW", 1);
+        Transport passengerCarSecond = new PassengerCar("BMW");
         assertFalse(imlParking.add(transportFirst));
         assertTrue(imlParking.add(passengerCarSecond));
     }
@@ -94,19 +94,21 @@ public class ImlParkingTest {
     @Test
     public void when2CarTakesThenHave1PlaceForTruck() {
         ImlParking imlParking = new ImlParking(0, 1);
-        Transport passengerCarSecond = new PassengerCar("BMW", 1);
-        Transport passengerCarThird = new PassengerCar("Priora", 1);
+        Transport passengerCarSecond = new PassengerCar("BMW");
+        Transport passengerCarThird = new PassengerCar("Priora");
         assertFalse(imlParking.add(passengerCarSecond));
         assertFalse(imlParking.add(passengerCarThird));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void when2PCThenHaveSizeGreater1() {
         ImlParking imlParking = new ImlParking(2, 0);
-        Transport passengerCarSecond = new PassengerCar("BMW", 2);
-        Transport passengerCarThird = new PassengerCar("Priora", 2);
+        Transport passengerCarSecond = new PassengerCar("BMW");
+        Transport passengerCarThird = new PassengerCar("Priora");
         imlParking.add(passengerCarSecond);
         imlParking.add(passengerCarThird);
+        assertFalse(imlParking.add(passengerCarSecond));
+        assertFalse(imlParking.add(passengerCarThird));
     }
 
     @Test(expected = IllegalArgumentException.class)
