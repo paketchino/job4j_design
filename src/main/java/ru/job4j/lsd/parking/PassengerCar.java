@@ -4,10 +4,11 @@ public class PassengerCar implements Transport {
 
     private String name;
     private int size;
+    private static final int SIZE = 1;
 
     public PassengerCar(String name) {
         this.name = name;
-        this.size = 1;
+        this.size = SIZE;
     }
 
     public void setSize(int size) {
@@ -22,6 +23,6 @@ public class PassengerCar implements Transport {
 
     @Override
     public int getSizeCar() {
-        return size;
+        return SIZE;
     }
 }
