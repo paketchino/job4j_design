@@ -1,4 +1,4 @@
-package ru.job4j.ood.dip.WrongDIP;
+package ru.job4j.ood.dip.wrongdip;
 
 import java.util.ArrayList;
 import java.util.List;
