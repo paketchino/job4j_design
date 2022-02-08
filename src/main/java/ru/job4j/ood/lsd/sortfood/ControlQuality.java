@@ -5,7 +5,7 @@ import ru.job4j.ood.lsd.storage.Storage;
 
 import java.util.List;
 
-public class ControlQuality {
+public class ControlQuality implements ResortFood {
 
     private List<Storage> storage;
 
@@ -18,8 +18,16 @@ public class ControlQuality {
      */
 
     public void sortFood(Food food) {
+        resort(food);
         for (Storage storage : storage) {
             storage.addFood(food);
+        }
+    }
+
+    @Override
+    public void resort(Food food) {
+        for (Storage storage : storage) {
+          storage.addFood(food);
         }
     }
 }
