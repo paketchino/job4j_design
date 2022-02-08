@@ -15,7 +15,6 @@ public class TODOApp {
     private final static String SELECT = "SELECT";
 
     public static void main(String[] args) throws IOException {
-        boolean rsl = true;
         SimpleMenu simpleMenu = new SimpleMenu();
         System.out.println("1. Add");
         System.out.println("2. Select");
@@ -29,15 +28,25 @@ public class TODOApp {
                 String parent = scanner.next();
                 System.out.println("Enter child name");
                 String child = scanner.next();
-                simpleMenu.add(parent, child, STUB_ACTION);
-            } else if (select.equals(SELECT)) {
+                boolean rls = simpleMenu.add(parent, child, STUB_ACTION);
+                if (rls) {
+                    System.out.println("Succesfull");
+                } else {
+                    System.out.println("Unseccosfull");
+                }
+                select = scanner.next();
+            }
+            if (select.equals(SELECT)) {
                 System.out.println("Enter child name");
                 String child = scanner.next();
                 System.out.println(simpleMenu.select(child));
-            } else if (select.equals(OUT)) {
+                select = scanner.next();
+            }
+            if (select.equals(OUT)) {
                 System.out.println("Output All");
                 OutPrint outPrint = new OutPrint();
                 outPrint.print(simpleMenu);
+                select = scanner.next();
             }
         }
     }
