@@ -17,12 +17,7 @@ public class Shop implements Storage {
 
     @Override
     public boolean addFood(Food food) {
-        boolean rsl = false;
-        if (accept(food)) {
-            shopList.add(food);
-            rsl = true;
-        }
-        return rsl;
+        return shopList.add(food);
     }
 
     /*
@@ -43,6 +38,11 @@ public class Shop implements Storage {
             rsl = true;
         }
         return rsl;
+    }
+
+    @Override
+    public List<Food> getFood() {
+        return shopList;
     }
 
     /*

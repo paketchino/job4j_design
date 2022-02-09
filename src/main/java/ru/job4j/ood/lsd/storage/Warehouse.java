@@ -40,6 +40,11 @@ public class Warehouse implements Storage {
         return rsl;
     }
 
+    @Override
+    public List<Food> getFood() {
+        return warehouseList;
+    }
+
     /*
    Возвращают размер листа для проверки
    что продукт был добавлен

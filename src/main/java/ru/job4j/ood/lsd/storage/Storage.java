@@ -1,14 +1,20 @@
 package ru.job4j.ood.lsd.storage;
 
 import ru.job4j.ood.lsd.product.Food;
+import ru.job4j.ood.lsd.sortfood.FoodList;
+import ru.job4j.ood.lsd.sortfood.SimpleFoodList;
+
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
+import java.util.List;
 
 public interface Storage {
 
     boolean addFood(Food food);
 
     boolean accept(Food food);
+
+    List<Food> getFood();
 
     /*
     Метод проверяет срок годности продукта

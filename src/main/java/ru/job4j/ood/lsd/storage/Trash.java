@@ -36,6 +36,11 @@ public class Trash implements Storage {
         return expiryDateCalculation(food) >= 100;
     }
 
+    @Override
+    public List<Food> getFood() {
+        return trashList;
+    }
+
     /*
     Возвращают размер листа для проверки
     что продукт был добавлен

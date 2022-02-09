@@ -5,6 +5,6 @@ import ru.job4j.ood.lsd.storage.Storage;
 
 public interface ResortFood {
 
-    void resort(Food food);
+    void resort();
 
 }
