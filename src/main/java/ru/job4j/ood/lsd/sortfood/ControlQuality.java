@@ -35,7 +35,8 @@ public class ControlQuality implements ResortFood {
     public void resort() {
         for (Storage storage1 : storage) {
             foodList.getFoodList().addAll(storage1.getFood());
+            storage1.clearList();
         }
-        storage.clear();
+        sortFood(foodList.getFoodList());
     }
 }

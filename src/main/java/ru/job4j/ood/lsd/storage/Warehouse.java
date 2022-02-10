@@ -42,7 +42,12 @@ public class Warehouse implements Storage {
 
     @Override
     public List<Food> getFood() {
-        return warehouseList;
+        return new ArrayList<>(warehouseList);
+    }
+
+    @Override
+    public void clearList() {
+        warehouseList.clear();
     }
 
     /*

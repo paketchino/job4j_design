@@ -17,7 +17,15 @@ public class Shop implements Storage {
 
     @Override
     public boolean addFood(Food food) {
-        return shopList.add(food);
+        boolean rsl = false;
+        if (accept(food)) {
+            if (expiryDateCalculation(food) > 75.0 && expiryDateCalculation(food) < 100) {
+                food.setPriceAfterDiscount();
+            }
+            shopList.add(food);
+            rsl = true;
+        }
+        return rsl;
     }
 
     /*
@@ -32,7 +40,6 @@ public class Shop implements Storage {
     public boolean accept(Food food) {
         boolean rsl = false;
         if (expiryDateCalculation(food) > 75.0 && expiryDateCalculation(food) < 100) {
-            food.setPriceAfterDiscount();
             rsl = true;
         } else if (expiryDateCalculation(food) > 25.0 && expiryDateCalculation(food) <= 75.0) {
             rsl = true;
@@ -42,7 +49,12 @@ public class Shop implements Storage {
 
     @Override
     public List<Food> getFood() {
-        return shopList;
+        return new ArrayList<>(shopList);
+    }
+
+    @Override
+    public void clearList() {
+        shopList.clear();
     }
 
     /*

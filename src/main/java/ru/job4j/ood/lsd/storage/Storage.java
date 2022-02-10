@@ -16,6 +16,8 @@ public interface Storage {
 
     List<Food> getFood();
 
+    void clearList();
+
     /*
     Метод проверяет срок годности продукта
     если макс. срок хранения не соотвествует текущему
