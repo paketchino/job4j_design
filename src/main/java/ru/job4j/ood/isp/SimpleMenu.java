@@ -1,8 +1,5 @@
 package ru.job4j.ood.isp;
 
-import org.w3c.dom.Node;
-import ru.job4j.collection.tree.Tree;
-
 import java.util.*;
 
 public class SimpleMenu implements Menu {
@@ -24,7 +21,6 @@ public class SimpleMenu implements Menu {
         }
         return rsl;
     }
-
     private MenuItem getMenu(String name) {
         Optional<ItemInfo> rsl = findItem(name);
         MenuItem item = null;

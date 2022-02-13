@@ -16,38 +16,36 @@ public class TODOApp {
 
     public static void main(String[] args) throws IOException {
         SimpleMenu simpleMenu = new SimpleMenu();
-        System.out.println("1. Add");
-        System.out.println("2. Select");
-        System.out.println("3. Out");
-        System.out.println("4. Exit");
+        System.out.println("ADD");
+        System.out.println("SELECT");
+        System.out.println("OUT");
+        System.out.println("EXIT");
         Scanner scanner = new Scanner(System.in);
         String select = scanner.next();
         while (!select.equals(EXIT)) {
-            if (select.equals(ADD)) {
-                System.out.println("Enter name parent");
-                String parent = scanner.next();
-                System.out.println("Enter child name");
-                String child = scanner.next();
-                boolean rls = simpleMenu.add(parent, child, STUB_ACTION);
-                if (rls) {
-                    System.out.println("Succesfull");
-                } else {
-                    System.out.println("Unseccosfull");
+            switch (select) {
+                case ADD -> {
+                    System.out.println("Enter name parent");
+                    String parent = scanner.next();
+                    System.out.println("Enter child name");
+                    String child = scanner.next();
+                    if (simpleMenu.add(parent, child, STUB_ACTION)) {
+                        System.out.println("Succesful");
+                    } else {
+                        System.out.println("Unsuccsesful");
+                    };
+                } case SELECT -> {
+                    System.out.println("Enter child name");
+                    String childSelect = scanner.next();
+                    System.out.println(simpleMenu.select(childSelect));
+                } case OUT -> {
+                    System.out.println("Output All");
+                    System.out.println(System.lineSeparator());
+                    OutPrint outPrint = new OutPrint();
+                    outPrint.print(simpleMenu);
                 }
-                select = scanner.next();
             }
-            if (select.equals(SELECT)) {
-                System.out.println("Enter child name");
-                String child = scanner.next();
-                System.out.println(simpleMenu.select(child));
-                select = scanner.next();
-            }
-            if (select.equals(OUT)) {
-                System.out.println("Output All");
-                OutPrint outPrint = new OutPrint();
-                outPrint.print(simpleMenu);
-                select = scanner.next();
-            }
+            select = scanner.next();
         }
     }
 }
