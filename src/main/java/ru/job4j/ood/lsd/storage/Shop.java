@@ -39,9 +39,7 @@ public class Shop implements Storage {
     @Override
     public boolean accept(Food food) {
         boolean rsl = false;
-        if (expiryDateCalculation(food) > 75.0 && expiryDateCalculation(food) < 100) {
-            rsl = true;
-        } else if (expiryDateCalculation(food) > 25.0 && expiryDateCalculation(food) <= 75.0) {
+        if (expiryDateCalculation(food) > 25.0 && expiryDateCalculation(food) <= 75.0) {
             rsl = true;
         }
         return rsl;
