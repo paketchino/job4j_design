@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
 
 public class SrpEx implements Store {
 
@@ -26,8 +27,18 @@ public class SrpEx implements Store {
                 + " и минимального " + "числа " + findMin);
     }
 
+    public <T> T calculate(BiFunction<T, T, T> function, T first, T second) {
+        return function.apply(first, second);
+    }
+
+    public static int sum (int a, int b) {
+        return a + b;
+    }
+
     public static void main(String[] args) {
         methodSearchMinMax(1, 2, 3, 4);
+        SrpEx srpEx = new SrpEx();
+        srpEx.calculate((a,b) -> a + b, 2, 3);
     }
 
 

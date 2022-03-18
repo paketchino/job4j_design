@@ -32,6 +32,7 @@ public class WrongOPC3 {
     OCP должны возвращать интерфейс List<Integer>
      */
     public ArrayList<Integer> getSum(int a, int b) {
+        List<Integer> list = new ArrayList<>();
         System.out.println("Something doing");
         return null;
     }
