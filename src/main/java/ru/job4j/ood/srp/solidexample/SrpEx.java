@@ -31,14 +31,14 @@ public class SrpEx implements Store {
         return function.apply(first, second);
     }
 
-    public static int sum (int a, int b) {
+    public static int sum(int a, int b) {
         return a + b;
     }
 
     public static void main(String[] args) {
         methodSearchMinMax(1, 2, 3, 4);
         SrpEx srpEx = new SrpEx();
-        srpEx.calculate((a,b) -> a + b, 2, 3);
+        srpEx.calculate((a, b) -> a + b, 2, 3);
     }
 
 

@@ -36,7 +36,7 @@ public class ExecutionPlan {
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
     @Warmup(iterations = 5)
-    public void benchMurmur3_128(ExecutionPlan plan) {
+    public void thisBenchmarkSomethingDoing(ExecutionPlan plan) {
 
         for (int i = plan.iterations; i > 0; i--) {
             plan.murmur3.putString(plan.password, Charset.defaultCharset());

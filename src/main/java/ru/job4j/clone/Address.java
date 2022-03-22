@@ -52,10 +52,9 @@ public class Address implements Cloneable {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+        return "Address{" + "street='" + street + '\''
+                + ", city='" + city + '\''
+                + ", country='" + country + '\''
+                + '}';
     }
 }

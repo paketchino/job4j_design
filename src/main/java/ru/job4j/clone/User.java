@@ -42,11 +42,10 @@ public class User implements Cloneable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address=" + address +
-                '}';
+        return "User{" + "firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", address=" + address
+                + '}';
     }
 
     @Override
