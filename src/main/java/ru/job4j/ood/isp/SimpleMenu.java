@@ -11,24 +11,19 @@ public class SimpleMenu implements Menu {
         boolean rsl = false;
         Optional<ItemInfo> findByName = findItem(parentName);
         MenuItem menuItem = new SimpleMenuItem(childName, action);
-        MenuItem item = getMenu(parentName);
-        if (findByName.isPresent()) {
-            item.getChildren().add(menuItem);
-            rsl = true;
-        } else {
+        if (Objects.equals(parentName, ROOT)) {
             rootElements.add(menuItem);
-            rsl = true;
+        } else {
+            if (findByName.isPresent() && findByName.get().getMenuItem().getChildren().isEmpty()) {
+                findByName.ifPresent(itemInfo -> itemInfo.menuItem.getChildren().add(menuItem));
+            } else if (findByName.isPresent() &&
+                    !findByName.get().getMenuItem().getChildren().isEmpty()) {
+                findByName.ifPresent(itemInfo -> itemInfo.menuItem.getChildren().add(menuItem));
+            }
         }
         return rsl;
     }
-    private MenuItem getMenu(String name) {
-        Optional<ItemInfo> rsl = findItem(name);
-        MenuItem item = null;
-        if (rsl.isPresent()) {
-            item = rsl.get().menuItem;
-        }
-        return item;
-    }
+
 
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
