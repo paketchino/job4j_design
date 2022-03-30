@@ -66,8 +66,8 @@ public class SimpleMenuTest {
         outPrint.print(menu);
         assertEquals("Задача 1."
                 + System.lineSeparator() + System.lineSeparator()
-                + "------- Задача 1.1." +
-                System.lineSeparator() + System.lineSeparator()
+                + "------- Задача 1.1."
+                + System.lineSeparator() + System.lineSeparator()
                 + "----------------- Задача 1.1.1."
                 + System.lineSeparator() + System.lineSeparator(), resultBuffer.toString());
         System.setOut(stdout);
